@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#7a1f3d">
 <title>Flash Sun</title>
 <link rel="icon" id="fav" href="data:,">
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -219,12 +220,19 @@ dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(2px)}
 .clock .sep2{width:1px;height:14px;background:var(--bd)}
 .clock .hr{font-weight:700;color:var(--tx);font-variant-numeric:tabular-nums}
 @media(max-width:860px){
-  .side{position:sticky;top:0;height:auto;z-index:20;flex-direction:row;align-items:center;gap:6px;padding:8px 10px}
-  .logo{padding:0;margin:0;border:0}.logo .txt,.logo .tog{display:none}.logo .sun{width:32px;height:32px;flex-basis:32px}
-  .nav{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;gap:4px;flex:1}
-  .nav button{padding:8px 10px;font-size:12px;white-space:nowrap;width:auto}
-  .nav .lbl{display:none}.nav .on .lbl{display:inline}
-  main{margin-left:0!important}
+  /* gaveta lateral no celular */
+  .side,body.mini .side{position:fixed!important;top:0;left:0;bottom:0;height:100%;height:100dvh;width:min(82vw,300px)!important;padding:20px 14px calc(16px + env(safe-area-inset-bottom))!important;
+    flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:0;z-index:60;transform:translateX(-105%);transition:transform .28s ease;overflow-y:auto;box-shadow:none}
+  body.menuAberto .side{transform:none;box-shadow:8px 0 40px rgba(0,0,0,.45)}
+  .side .logo,body.mini .side .logo{justify-content:flex-start;padding:0 8px 18px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .side .logo .txt,body.mini .side .logo .txt{display:block}.side .logo .tog{display:block!important}
+  .side .nav,body.mini .side .nav{flex-direction:column!important;flex-wrap:nowrap;overflow:visible;gap:6px}
+  .side .nav button,body.mini .side .nav button{justify-content:flex-start!important;padding:14px!important;font-size:15px;width:100%}
+  .side .nav .lbl,body.mini .side .nav .lbl{display:inline!important}
+  .side .sidefoot,body.mini .side .sidefoot{display:block!important;margin-top:auto;padding-top:16px}
+  main,body.mini main{margin-left:0!important;padding:0 14px 30px!important}
+  .mbar-top{display:flex}
+  .topbar{margin:12px 0 12px}
   .title h2{font-size:17px}
   .box{padding:14px}
   .row>label,.row>.btn{flex:1 1 140px}
@@ -261,6 +269,15 @@ mark.df{background:rgba(250,204,21,.30);color:inherit;border-radius:3px;padding:
 .prova .cols3>div{border:1px solid var(--bd);border-radius:12px;padding:12px;background:var(--card2)}
 .prova .st{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
 @media(max-width:860px){.cmp,.parbtns{grid-template-columns:1fr}.prova .big{font-size:32px}}
+.mbar-top{display:none;position:sticky;top:0;z-index:40;align-items:center;gap:10px;margin:0 -14px;padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top));
+  background:var(--side);color:var(--sidetx);box-shadow:0 4px 18px rgba(0,0,0,.18)}
+.mbar-top .hb{width:42px;height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:inherit;font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center}
+.mbar-top .ttl{flex:1;min-width:0}.mbar-top .ttl b{display:block;font-size:15px;letter-spacing:.12em;text-transform:uppercase}.mbar-top .ttl small{font-size:12px;opacity:.8}
+.mbar-top .ms{width:30px;height:30px;color:var(--navacc);filter:drop-shadow(0 0 6px var(--navacc))}.mbar-top .ms svg{width:100%;height:100%}
+.veu{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(2px);z-index:55;opacity:0;pointer-events:none;transition:opacity .25s}
+body.menuAberto .veu{opacity:1;pointer-events:auto}
+body.menuAberto{overflow:hidden}
+@media(max-width:860px){.mbar-top{display:flex}}
 .toast{position:fixed;bottom:22px;right:22px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--btntx);padding:11px 18px;border-radius:10px;opacity:0;transition:.3s;pointer-events:none;box-shadow:0 0 20px var(--glow);z-index:20}
 .toast.on{opacity:1}
 .mbar{height:10px;background:var(--bd);border-radius:6px;overflow:hidden;margin-top:12px}
@@ -315,7 +332,9 @@ mark.mo{background:rgba(46,139,87,.22);color:inherit;border-radius:4px;padding:0
   <div class="sidefoot"><button id="sideNuvem">☁ Conectar nuvem</button><button id="tema">◐ Alternar tema</button><div id="sideInfo"></div></div>
 </aside>
 
+<div class="veu" id="veu"></div>
 <main>
+<div class="mbar-top" id="mbarTop"><button class="hb" id="hb" aria-label="Abrir menu">☰</button><div class="ms" id="mIcon"></div><div class="ttl"><b>Flash Sun</b><small id="mTit">Estudar</small></div></div>
 <div class="topbar"><div class="clock"><span id="clock" style="display:contents"></span><span id="cloudSt"></span></div></div>
 <!-- ================= ESTUDAR ================= -->
 <section id="estudar" class="sec on">
@@ -503,7 +522,7 @@ mark.mo{background:rgba(46,139,87,.22);color:inherit;border-radius:4px;padding:0
       <p class="small">Seus dados ficam em um <b>Gist secreto</b> da sua conta GitHub (arquivo <b>flashsun-dados.json</b>). Conecte o mesmo token no celular e no notebook para estudar com o mesmo progresso.</p>
       <div id="nuvemInfo"></div>
       <div class="row">
-        <label style="flex:1;min-width:280px">Token de acesso do GitHub (permissão “gist”)<input id="ghToken" type="password" autocomplete="off" spellcheck="false" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"></label>
+        <label style="flex:1;min-width:240px">Token de acesso do GitHub (permissão “gist”)<input id="ghToken" type="password" autocomplete="off" spellcheck="false" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"></label>
         <button class="btn" id="ghVer" title="Mostrar/ocultar">👁</button>
         <button class="btn p" id="ghConectar">🔗 Conectar</button>
       </div>
@@ -1634,11 +1653,13 @@ $("#pProcTexto").onclick=()=>{const t=$("#pTexto").value;if(t.trim())try{process
 
 /* ================= NAVEGAÇÃO / TEMA ================= */
 function irPara(id){
+  const bt=document.querySelector(`.nav button[data-s="${id}"] .lbl`);if(bt&&$("#mTit"))$("#mTit").textContent=bt.textContent;
+  if(typeof ehCel==="function"&&ehCel())scrollTo(0,0);
   $$(".nav button").forEach(x=>x.classList.toggle("on",x.dataset.s===id));
   $$(".sec").forEach(s=>s.classList.toggle("on",s.id===id));
   refresh();
 }
-$$(".nav button").forEach(b=>b.onclick=()=>irPara(b.dataset.s));
+$$(".nav button").forEach(b=>b.onclick=()=>{irPara(b.dataset.s);if(ehCel())menuCel(false)});
 const TEMAS={
   claro:{n:"Claro – gelo e vinho",dark:false,sw:["#e8ecf0","#7a1f3d","#ffffff"]},
   escuro:{n:"Escuro – azul frio",dark:true,sw:["#060a13","#22d3ee","#0d1526"]},
@@ -1674,7 +1695,7 @@ const ICONS={
 };
 function setIcone(k){
   if(!ICONS[k])k="raio";db.cfg.icone=k;
-  $("#logoIcon").innerHTML=`<svg viewBox="0 0 48 48">${ICONS[k].svg}</svg>`;
+  $("#logoIcon").innerHTML=`<svg viewBox="0 0 48 48">${ICONS[k].svg}</svg>`;if($("#mIcon"))$("#mIcon").innerHTML=$("#logoIcon").innerHTML;
   $("#fav").href="data:image/svg+xml,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">${ICONS[k].svg.replace(/currentColor/g,"#7a1f3d")}</svg>`);
 }
 function renderIcones(){
@@ -1682,7 +1703,17 @@ function renderIcones(){
 }
 $("#iconOpts").onclick=e=>{const b=e.target.closest("[data-k]");if(!b)return;setIcone(b.dataset.k);salvar();renderIcones();toast("Ícone atualizado")};
 function setMini(v){document.body.classList.toggle("mini",v);db.cfg.mini=v;salvar()}
-$("#logo").onclick=()=>setMini(!document.body.classList.contains("mini"));
+const ehCel=()=>matchMedia("(max-width:860px)").matches;
+function menuCel(v){document.body.classList.toggle("menuAberto",v);$("#hb").textContent=v?"✕":"☰"}
+$("#logo").onclick=()=>{if(ehCel())menuCel(false);else setMini(!document.body.classList.contains("mini"))};
+$("#hb").onclick=()=>menuCel(!document.body.classList.contains("menuAberto"));
+$("#veu").onclick=()=>menuCel(false);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&document.body.classList.contains("menuAberto"))menuCel(false)});
+(()=>{let x0=null,y0=null;
+  document.addEventListener("touchstart",e=>{const t=e.touches[0];x0=t.clientX;y0=t.clientY},{passive:true});
+  document.addEventListener("touchend",e=>{if(x0===null||!ehCel())return;const t=e.changedTouches[0],dx=t.clientX-x0,dy=Math.abs(t.clientY-y0);
+    if(dy<60){if(!document.body.classList.contains("menuAberto")&&x0<28&&dx>70)menuCel(true);else if(document.body.classList.contains("menuAberto")&&dx<-70)menuCel(false)}x0=null},{passive:true});
+})();
 function carregarCfgMeta(){carregarCfgProva();$("#fDest").checked=db.cfg.destacar;$("#cfgMeta").value=db.cfg.meta;$("#cfgHora").value=db.cfg.lembrete;$("#cfgRep").checked=db.cfg.repetir;$("#cfgNotif").checked=db.cfg.notif;$("#fPri").checked=db.cfg.priorizar}
 $("#cfgSalvar").onclick=()=>{
   db.cfg.meta=Math.max(1,parseInt($("#cfgMeta").value)||10);db.cfg.repetir=$("#cfgRep").checked;
@@ -1726,8 +1757,6 @@ let aplicandoNuvem=false,gh=lsJ.get(GH_KEY),nuvem={estado:"off",msg:"",ocupado:f
 const sync=Object.assign({ver:"",httpEtag:"",snap:null,ultima:"",sujo:false,primeira:true},lsJ.get(SYNC_KEY)||{});
 const salvarSync=()=>lsJ.set(SYNC_KEY,sync);
 const aleatorio=n=>Array.from(crypto.getRandomValues(new Uint8Array(n)),b=>b.toString(16).padStart(2,"0")).join("");
-
-/* --- API do GitHub --- */
 async function api(caminho,op={}){
   if(!gh||!gh.token)throw Object.assign(new Error("Token não informado"),{codigo:"token"});
   let r;
@@ -1792,8 +1821,6 @@ function sair(){
   if(!confirm("Desconectar o GitHub deste aparelho? Os dados continuam aqui e no Gist."))return;
   ls.del(GH_KEY);gh=null;sync.ver="";sync.httpEtag="";sync.snap=null;sync.primeira=true;salvarSync();setNuvem("off");renderNuvem();
 }
-
-/* --- carimbo de alterações por jurisprudência --- */
 let hashCards=new Map(),hashTax="",hashCfg="",hashesProntos=false;
 const semMod=c=>{const{mod,...r}=c;return JSON.stringify(r)};
 const cfgCompartilhada=()=>{const{lacStats,mini,avisado,ultimoAviso,cfgMod,...r}=db.cfg;return JSON.stringify(r)};
@@ -1806,8 +1833,6 @@ function carimbar(){
   const hc=cfgCompartilhada();if(hc!==hashCfg){db.cfg.cfgMod=agora;hashCfg=cfgCompartilhada();mudou=true}
   return mudou;
 }
-
-/* --- junção do progresso de vários aparelhos --- */
 const contadores=d=>JSON.parse(JSON.stringify({log:d.log||{},peg:d.peg||{},lac:(d.cfg&&d.cfg.lacStats)||{ok:0,tot:0},xp:(d.game&&d.game.xp)||0}));
 function somaDelta(r,l,s){
   if(typeof l==="number"||typeof r==="number"||typeof s==="number")return Math.max(0,(+r||0)+(+l||0)-(+s||0));
@@ -1850,8 +1875,6 @@ function paraNuvem(d){const o=JSON.parse(JSON.stringify(d));o.versao=7;o.salvoEm
   const lim=Date.now()-180*864e5;Object.keys(o.del||{}).forEach(k=>{if(o.del[k]<lim)delete o.del[k]});return o}
 const soExemplos=d=>d.cards.length<=EXEMPLOS.length&&d.cards.every(c=>/^Exemplo/.test(c.fonte||"")&&!(c.srs.hist||[]).length);
 const paraComparar=d=>({cards:d.cards,del:d.del||{},tax:d.tax,log:d.log,peg:d.peg,lidas:d.lidas,game:d.game});
-
-/* --- ciclo de sincronização --- */
 function setNuvem(estado,msg=""){nuvem.estado=estado;nuvem.msg=msg;renderStatusNuvem();if($("#config").classList.contains("on"))renderNuvem()}
 function agendarSync(ms=4000){if(!gh)return;clearTimeout(nuvem.timer);nuvem.timer=setTimeout(()=>sincronizar(),ms)}
 async function sincronizar(opc={}){
@@ -1875,7 +1898,6 @@ async function sincronizar(opc={}){
       const precisa=!r||!r.dados||sync.sujo||JSON.stringify(paraComparar(db))!==JSON.stringify(paraComparar(r.dados));
       let ver=r?r.ver:"";
       if(precisa){
-        // checa se outro aparelho gravou entre a leitura e a gravação
         if(r&&r.ver){const chk=await lerGist(true);if(chk&&!chk.igual&&chk.ver&&chk.ver!==r.ver){sync.httpEtag="";continue}}
         ver=(await gravarGist()).ver;
       }
@@ -1896,8 +1918,6 @@ async function verificarRemoto(){
   if(!gh||!gh.gistId||nuvem.ocupado||!navigator.onLine||document.hidden)return;
   try{const r=await lerGist(true);if(r&&!r.igual)sincronizar();else if(!r)sincronizar()}catch(e){}
 }
-
-/* --- interface --- */
 const ROT={off:["☁","Conectar nuvem","var(--mut)"],ok:["☁ ✓","Sincronizado","var(--ok)"],sync:["⟳","Sincronizando","var(--pri)"],pend:["⏳","Pendente","var(--warn)"],offline:["⚠","Offline","var(--warn)"],erro:["⚠","Erro","var(--bad)"],token:["🔑","Token inválido","var(--bad)"]};
 function renderStatusNuvem(){
   const el=$("#cloudSt");if(!el)return;const [ic,tx,cor]=ROT[nuvem.estado]||ROT.off;
@@ -1921,7 +1941,7 @@ $("#ghVer").onclick=()=>{const i=$("#ghToken");i.type=i.type==="password"?"text"
 $("#nvSync").onclick=()=>sincronizar();
 $("#nvRest").onclick=()=>{if(confirm("Substituir os dados deste aparelho pelos dados do GitHub?"))sincronizar({substituir:true})};
 $("#nvSair").onclick=sair;
-$("#sideNuvem").onclick=abrirNuvem;$("#cloudSt").onclick=abrirNuvem;
+$("#sideNuvem").onclick=()=>{abrirNuvem();if(ehCel())menuCel(false)};$("#cloudSt").onclick=abrirNuvem;
 window.addEventListener("online",()=>agendarSync(500));
 window.addEventListener("offline",()=>setNuvem(sync.sujo?"pend":"offline","Sem internet"));
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)verificarRemoto();else if(sync.sujo&&gh){clearTimeout(nuvem.timer);sincronizar()}});
