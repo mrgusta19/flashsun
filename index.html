@@ -312,6 +312,10 @@ body.menuAberto{overflow:hidden}
 .star.off{color:var(--mut);opacity:.45;text-shadow:none}
 .heart{cursor:pointer;color:#e0457b;font-size:15px;margin-right:5px;text-shadow:0 0 6px rgba(224,69,123,.45)}
 .heart.off{color:var(--mut);opacity:.4;text-shadow:none}
+.chip.aula{cursor:pointer;padding:5px 8px 5px 12px;user-select:none}
+.chip.aula.on{background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--btntx);border-color:transparent}
+.chip.aula .hz{border:0;background:transparent;cursor:pointer;font-size:15px;line-height:1;padding:0 2px;color:inherit;opacity:.85}
+.chip.aula .hz.on{color:#ff7aa5;opacity:1;text-shadow:0 0 6px rgba(224,69,123,.6)}
 .tagbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
 .tagbar .lbl2{font-size:11px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin-right:4px}
 .htag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:12px;border:1px dashed var(--pri);color:var(--pri);background:transparent;cursor:pointer;user-select:none}
@@ -524,7 +528,7 @@ mark.mo{background:rgba(46,139,87,.22);color:inherit;border-radius:4px;padding:0
     <div id="taxList"></div>
     <div class="box">
       <h3>Aulas</h3>
-      <p class="small">Cadastre as aulas do seu curso. Elas aparecem em lista suspensa na edição da jurisprudência, na importação e nos filtros. Ao renomear, as jurisprudências vinculadas são atualizadas.</p>
+      <p class="small">Cadastre as aulas do seu curso. Elas aparecem como opções clicáveis (uma ou mais por jurisprudência) na edição, na importação e nos filtros. Ao renomear, as jurisprudências vinculadas são atualizadas.</p>
       <div class="row"><label style="flex:1">Nova(s) aula(s) – separe várias com “;” ou uma por linha<textarea id="novaAula" style="min-height:44px" placeholder="Ex.: Aula 01 – Princípios; Aula 02 – Relação de emprego"></textarea></label><button class="btn p" id="addAula">＋ Adicionar</button></div>
       <div class="chips" id="aulaList" style="margin-top:12px"></div>
     </div>
@@ -662,9 +666,12 @@ mark.mo{background:rgba(46,139,87,.22);color:inherit;border-radius:4px;padding:0
     <datalist id="dlTags"></datalist>
     <div class="sep">Verso</div>
     <label class="full">Tese / enunciado<textarea id="eTese"></textarea></label>
-    <label>Aula<span class="row" style="flex-wrap:nowrap;gap:6px"><select id="eAula" style="flex:1"></select><button type="button" class="btn s" id="eNovaAula" title="Cadastrar nova aula">＋</button></span></label>
+
     <label>Fonte<input id="eFonte"></label>
-    <label class="ck full" id="eEssLbl"><input type="checkbox" id="eEss"> <span id="eEssTxt">♥ Essencial para a aula</span></label>
+    <div class="full"><label style="margin-bottom:6px">Aulas – clique para marcar uma ou mais · ♡/♥ = essencial naquela aula</label>
+      <div class="relbox"><div class="chips" id="eAulas" style="margin-bottom:6px"></div>
+        <div class="small" id="eAulasRes" style="margin:-2px 0 8px"></div>
+        <div class="row" style="flex-wrap:nowrap;gap:6px"><input id="eAulaBusca" placeholder="Filtrar aulas ou digitar uma nova" style="flex:1"><button type="button" class="btn s" id="eNovaAula" title="Cadastrar nova aula">＋ Nova aula</button></div></div></div>
     <label class="full">Observações / pegadinha<input id="eObs"></label>
     <div class="full"><label style="margin-bottom:6px">Pares de confusão – jurisprudências que você costuma confundir com esta</label>
       <div class="relbox"><div class="chips" id="ePares"></div>
@@ -770,7 +777,7 @@ const EXEMPLOS=[
 ];
 const srsNovo=()=>({ease:2.5,int:0,reps:0,due:null,lapses:0,hist:[],ok:0,err:0,last:null});
 function novoCartao(o){return{id:uid(),tipo:o.tipo||"Súmula",numero:String(o.numero??"").trim(),assunto:o.assunto||"",tese:o.tese||"",
-  tema:o.tema||SEM,disciplina:o.disciplina||"",aula:o.aula||"",fonte:o.fonte||"",obs:o.obs||"",cobrada:o.cobrada===true,falsas:o.falsas||"",pares:Array.isArray(o.pares)?o.pares:[],outras:Array.isArray(o.outras)?o.outras:[],tags:Array.isArray(o.tags)?o.tags:[],questoes:Array.isArray(o.questoes)?o.questoes:[],essencial:o.essencial===true,temasRel:Array.isArray(o.temasRel)?o.temasRel:[],srs:srsNovo()}}
+  tema:o.tema||SEM,disciplina:o.disciplina||"",aula:o.aula||"",fonte:o.fonte||"",obs:o.obs||"",cobrada:o.cobrada===true,falsas:o.falsas||"",pares:Array.isArray(o.pares)?o.pares:[],outras:Array.isArray(o.outras)?o.outras:[],aulas:Array.isArray(o.aulas)?o.aulas:(o.aula?[o.aula]:[]),essAulas:Array.isArray(o.essAulas)?o.essAulas:[],tags:Array.isArray(o.tags)?o.tags:[],questoes:Array.isArray(o.questoes)?o.questoes:[],essencial:o.essencial===true,temasRel:Array.isArray(o.temasRel)?o.temasRel:[],srs:srsNovo()}}
 let db;
 function addTax(d,m){if(!d)return;db.tax[d]=db.tax[d]||[];if(m&&m!==SEM&&!db.tax[d].includes(m))db.tax[d].push(m)}
 function carregar(){
@@ -790,7 +797,9 @@ function carregarNormalizar(){
   db.peg=db.peg||{};db.game=db.game||{xp:0,dias:{},melhorCombo:0};
   if(!db.lidas){db.lidas={};db.cards.forEach(c=>(c.srs&&c.srs.hist||[]).forEach(h=>{const a=db.lidas[h.d]=db.lidas[h.d]||[];if(!a.includes(c.id))a.push(c.id)}))}
   db.cards.forEach(c=>{
-    c.aula=c.aula||"";c.tema=c.tema||SEM;c.disciplina=c.disciplina||"";c.cobrada=c.cobrada===true;c.essencial=c.essencial===true&&!!c.aula;c.tags=Array.isArray(c.tags)?[...new Set(c.tags.map(limparTag).filter(Boolean))]:[];c.questoes=Array.isArray(c.questoes)?c.questoes.filter(q=>q&&q.enun):[];c.pares=Array.isArray(c.pares)?c.pares:[];c.outras=(Array.isArray(c.outras)?c.outras:[]).filter(o=>o&&o.disciplina&&o.disciplina!==c.disciplina).map(o=>({disciplina:o.disciplina,tema:o.tema||SEM,temasRel:Array.isArray(o.temasRel)?o.temasRel:[]}));c.temasRel=Array.isArray(c.temasRel)?c.temasRel:[];
+    c.aula=c.aula||"";c.tema=c.tema||SEM;c.disciplina=c.disciplina||"";c.cobrada=c.cobrada===true;c.aulas=[...new Set((Array.isArray(c.aulas)?c.aulas:[]).filter(Boolean))];if(c.aula&&!c.aulas.includes(c.aula))c.aulas.unshift(c.aula);
+    c.essAulas=Array.isArray(c.essAulas)?c.essAulas.filter(a=>c.aulas.includes(a)):(c.essencial===true&&c.aula?[c.aula]:[]);c.essAulas=[...new Set(c.essAulas)];
+    c.aula=c.aulas[0]||"";c.essencial=c.essAulas.length>0;c.tags=Array.isArray(c.tags)?[...new Set(c.tags.map(limparTag).filter(Boolean))]:[];c.questoes=Array.isArray(c.questoes)?c.questoes.filter(q=>q&&q.enun):[];c.pares=Array.isArray(c.pares)?c.pares:[];c.outras=(Array.isArray(c.outras)?c.outras:[]).filter(o=>o&&o.disciplina&&o.disciplina!==c.disciplina).map(o=>({disciplina:o.disciplina,tema:o.tema||SEM,temasRel:Array.isArray(o.temasRel)?o.temasRel:[]}));c.temasRel=Array.isArray(c.temasRel)?c.temasRel:[];
     const s=c.srs=Object.assign(srsNovo(),c.srs||{});
     if(c.srs.ok===0&&c.srs.err===0&&s.hist.length){s.ok=s.hist.filter(h=>h.r>=1).length;s.err=s.hist.filter(h=>h.r===0).length}
     if(!s.last&&s.hist.length)s.last=s.hist[s.hist.length-1].d;
@@ -799,7 +808,7 @@ function carregarNormalizar(){
   });
   if(!Object.keys(db.tax).length)db.tax["Direito do Trabalho"]=[];
   if(!Array.isArray(db.aulas))db.aulas=[];
-  db.cards.forEach(c=>{if(c.aula&&!db.aulas.includes(c.aula))db.aulas.push(c.aula)});db.aulas.sort(cmp);
+  db.cards.forEach(c=>(c.aulas||[]).forEach(a=>{if(!db.aulas.includes(a))db.aulas.push(a)}));db.aulas.sort(cmp);
   db.diario=db.diario||{};const lim=addDias(-365);Object.keys(db.diario).forEach(d=>{if(d<lim)delete db.diario[d]});
 }
 function salvar(){try{if(typeof hashesProntos!=="undefined"&&hashesProntos&&!aplicandoNuvem&&carimbar()&&gh){sync.sujo=true;salvarSync();setNuvem(navigator.onLine?"pend":"offline","Alterações pendentes");agendarSync()}localStorage.setItem(KEY,JSON.stringify(db));return true}catch(e){toast("Não foi possível salvar no navegador");return false}}
@@ -845,9 +854,12 @@ function renderTagBar(el,sel,cb){
 const discsDe=c=>[c.disciplina,...(c.outras||[]).map(o=>o.disciplina)].filter(Boolean);
 const temasDe=(c,d)=>[...((!d||c.disciplina===d)?[c.tema,...(c.temasRel||[])]:[]),...(c.outras||[]).filter(o=>!d||o.disciplina===d).flatMap(o=>[o.tema,...(o.temasRel||[])])].filter(x=>x&&x!==SEM);
 const discOk=(c,d)=>!d||discsDe(c).includes(d);
-const aulasLista=()=>[...new Set([...(db.aulas||[]),...uniq("aula")])].sort(cmp);
+const aulasLista=()=>[...new Set([...(db.aulas||[]),...db.cards.flatMap(c=>c.aulas||(c.aula?[c.aula]:[]))])].sort(cmp);
+const aulasDe=c=>c.aulas&&c.aulas.length?c.aulas:(c.aula?[c.aula]:[]);
+const essEm=(c,a)=>a?(c.essAulas||[]).includes(a):(c.essAulas||[]).length>0;
+function setAulas(c,aulas,ess){c.aulas=[...new Set(aulas.filter(Boolean))];c.essAulas=[...new Set((ess||[]).filter(a=>c.aulas.includes(a)))];c.aula=c.aulas[0]||"";c.essencial=c.essAulas.length>0}
 function tagsDisc(c){
-  const t=[...(c.essencial&&c.aula?[`<span class="tag" style="color:#e0457b">♥ Essencial – ${esc(c.aula)}</span>`]:[]),`<span class="tag">${esc(c.disciplina||"Sem disciplina")}</span><span class="tag">★ ${esc(c.tema)}</span>`,...(c.temasRel||[]).map(m=>`<span class="tag rel">${esc(m)}</span>`)];
+  const t=[...(c.essAulas||[]).map(a=>`<span class="tag" style="color:#e0457b">♥ Essencial – ${esc(a)}</span>`),`<span class="tag">${esc(c.disciplina||"Sem disciplina")}</span><span class="tag">★ ${esc(c.tema)}</span>`,...(c.temasRel||[]).map(m=>`<span class="tag rel">${esc(m)}</span>`)];
   (c.outras||[]).forEach(o=>{t.push(`<span class="tag" style="opacity:.85">${esc(o.disciplina)}</span><span class="tag rel">★ ${esc(o.tema)}</span>`);(o.temasRel||[]).forEach(m=>t.push(`<span class="tag rel">${esc(m)}</span>`))});
   (c.tags||[]).forEach(x=>t.push(`<span class="tag" style="border:1px dashed var(--pri);background:transparent">#${esc(x)}</span>`));
   return t.join("");
@@ -968,8 +980,8 @@ function kpisEstudo(){
 function iniciar(){
   jogo=false;
   const d=$("#fDisc").value,te=$("#fTema").value,ti=$("#fTipo").value,au=$("#fAula").value,m=$("#fModo").value,lim=Math.max(1,+$("#fLim").value||20),t=iso(hoje());
-  let arr=db.cards.filter(c=>discOk(c,d)&&temaOk(c,te)&&(!ti||c.tipo===ti)&&(!au||c.aula===au)&&tagsOk(c,fTagSel));
-  if(m==="ess")arr=arr.filter(c=>c.essencial);
+  let arr=db.cards.filter(c=>discOk(c,d)&&temaOk(c,te)&&(!ti||c.tipo===ti)&&(!au||aulasDe(c).includes(au))&&tagsOk(c,fTagSel));
+  if(m==="ess")arr=arr.filter(c=>essEm(c,au));
   if($("#fEst").value==="qst"){arr=arr.filter(c=>(c.questoes||[]).length);if(!arr.length){$("#area").innerHTML='<div class="box empty">Nenhuma questão de prova cadastrada para esse filtro.<br><span class="small">Cadastre questões na edição da jurisprudência (seção “Questões de prova”).</span></div>';return}}
   if(m==="due")arr=arr.filter(c=>!c.srs.last||(c.srs.due&&c.srs.due<=t));
   if(m==="new")arr=arr.filter(c=>!c.srs.last);
@@ -1005,7 +1017,7 @@ function proximo(){
   const tags=`<div>${c.cobrada?'<span class="tag" style="color:var(--warn)">★ Mais cobrada</span>':""}${tagsDisc(c)}</div>`;
   const ident=`<div class="num">${esc(c.tipo)} ${esc(c.numero)}</div><div class="ass">${esc(c.assunto)}</div>`;
   const tese=`<div class="tese" style="margin-top:14px">${c.tese?(db.cfg.destacar?destacar(c.tese):esc(c.tese)):"<i>Tese ainda não cadastrada.</i>"}</div>`;
-  const extra=(c.aula?`<p style="margin:16px 0 0"><span class="tag">📚 ${esc(c.aula)}</span></p>`:"")+(c.obs?`<p class="small" style="margin-top:10px">⚠️ ${esc(c.obs)}</p>`:"")+(c.fonte?`<p class="small">Fonte: ${esc(c.fonte)}</p>`:"");
+  const extra=(aulasDe(c).length?`<p style="margin:16px 0 0">${aulasDe(c).map(a=>`<span class="tag">📚 ${esc(a)}${essEm(c,a)?" ♥":""}</span>`).join("")}</p>`:"")+(c.obs?`<p class="small" style="margin-top:10px">⚠️ ${esc(c.obs)}</p>`:"")+(c.fonte?`<p class="small">Fonte: ${esc(c.fonte)}</p>`:"");
   const frente=inv?`${tags}<div class="small">Qual é o enunciado?</div>${tese}<div class="hint">Clique ou pressione Espaço para ver a resposta</div>`
                   :`${tags}${ident}<div class="hint">Recorde a tese e clique (ou Espaço) para conferir</div>`;
   const verso=inv?`${tags}${ident}${tese}${extra}`:`${tags}<div style="font-weight:700;color:var(--pri)">${esc(c.tipo)} ${esc(c.numero)} – ${esc(c.assunto)}</div>${tese}${extra}`;
@@ -1339,7 +1351,7 @@ const ORDEM_TIPO=["Súmula Vinculante","Súmula STF","Súmula STJ","Súmula","OJ
 const ORD_SIT=["Revisar","Novo","Aprendendo","Dominado"];
 const porNumero=(a,b)=>(ORDEM_TIPO.indexOf(a.tipo)-ORDEM_TIPO.indexOf(b.tipo))||cmp(a.tipo,b.tipo)||((parseInt(a.numero)||0)-(parseInt(b.numero)||0));
 const SORTS={num:porNumero,alfa:(a,b)=>cmp(a.assunto,b.assunto)||porNumero(a,b),tema:(a,b)=>cmp(a.tema,b.tema)||porNumero(a,b),
-  disc:(a,b)=>cmp(a.disciplina,b.disciplina)||cmp(a.tema,b.tema)||porNumero(a,b),aula:(a,b)=>(!a.aula-!b.aula)||cmp(a.aula,b.aula)||porNumero(a,b),
+  disc:(a,b)=>cmp(a.disciplina,b.disciplina)||cmp(a.tema,b.tema)||porNumero(a,b),aula:(a,b)=>(!a.aula-!b.aula)||cmp(a.aula,b.aula)||(aulasDe(a).length-aulasDe(b).length)||porNumero(a,b),
   sit:(a,b)=>(ORD_SIT.indexOf(situacao(a)[0])-ORD_SIT.indexOf(situacao(b)[0]))||porNumero(a,b),
   erros:(a,b)=>(b.srs.err-a.srs.err)||(b.srs.ok-a.srs.ok)||porNumero(a,b),
   prox:(a,b)=>(a.srs.due||"9999").localeCompare(b.srs.due||"9999")||porNumero(a,b),
@@ -1352,22 +1364,22 @@ function renderLista(){
   const es=$("#jEss").value,qs=$("#jQst").value;renderTagBar("#jTags",jTagSel,renderLista);
   const q=norm($("#busca").value),d=$("#jDisc").value,te=$("#jTema").value,ti=$("#jTipo").value,au=$("#jAula").value,si=$("#jSit").value,cb=$("#jCob").value,o=$("#jOrd").value;
   const cn=norm($("#cNum").value),ca=norm($("#cAss").value),ae=$("#cAE").value,px=$("#cProx").value,t=iso(hoje());
-  let arr=db.cards.filter(c=>discOk(c,d)&&temaOk(c,te)&&(!ti||c.tipo===ti)&&(!au||c.aula===au)
+  let arr=db.cards.filter(c=>discOk(c,d)&&temaOk(c,te)&&(!ti||c.tipo===ti)&&(!au||aulasDe(c).includes(au))
     &&(!si||(si==="erro"?c.srs.err>0:situacao(c)[0]===si))
     &&(!cb||(cb==="s"?c.cobrada:!c.cobrada))
-    &&(!es||(es==="s"?c.essencial:!c.essencial))&&(!qs||(qs==="s"?(c.questoes||[]).length:!(c.questoes||[]).length))&&tagsOk(c,jTagSel)
+    &&(!es||(es==="s"?essEm(c,au):!essEm(c,au)))&&(!qs||(qs==="s"?(c.questoes||[]).length:!(c.questoes||[]).length))&&tagsOk(c,jTagSel)
     &&(!cn||norm(c.numero)===cn||norm(c.tipo+" "+c.numero).includes(cn))
     &&(!ca||norm(c.assunto).includes(ca))
     &&(!ae||(ae==="erro"?c.srs.err>0:ae==="ok"?(c.srs.ok>0&&c.srs.err===0):(c.srs.ok+c.srs.err===0)))
     &&(!px||(px==="sem"?!c.srs.due:px==="venc"?(c.srs.due&&c.srs.due<=t):(c.srs.due&&c.srs.due>t&&c.srs.due<=addDias(+px))))
-    &&(!q||norm([c.tipo,c.numero,c.assunto,c.tese,c.tema,c.disciplina,c.aula,c.obs,...discsDe(c),...temasDe(c),...(c.tags||[]).map(t=>"#"+t)].join(" ")).includes(q)));
+    &&(!q||norm([c.tipo,c.numero,c.assunto,c.tese,c.tema,c.disciplina,...aulasDe(c),c.obs,...discsDe(c),...temasDe(c),...(c.tags||[]).map(t=>"#"+t)].join(" ")).includes(q)));
   arr.sort(SORTS[o]||porNumero);if(!dirAsc)arr.reverse();listaAtual=arr;
   $$("#tabJ th[data-o]").forEach(th=>{const on=th.dataset.o===o;th.classList.toggle("on",on);th.querySelector(".ar").textContent=on?(dirAsc?"▲":"▼"):"⇅"});
   $("#jCont").textContent=`${arr.length} de ${db.cards.length} jurisprudências · ${arr.filter(c=>c.cobrada).length} ★`;
   $("#lista").innerHTML=arr.map(c=>{const[s,cor]=situacao(c);return`<tr data-id="${c.id}" style="cursor:pointer">
-    <td style="white-space:nowrap"><span class="star${c.cobrada?"":" off"}" data-star title="${c.cobrada?"Desmarcar":"Marcar"} como mais cobrada">${c.cobrada?"★":"☆"}</span>${c.aula?`<span class="heart${c.essencial?"":" off"}" data-heart title="${c.essencial?"Desmarcar":"Marcar"} como essencial para ${esc(c.aula)}">${c.essencial?"♥":"♡"}</span>`:""}<b>${esc(c.tipo)} ${esc(c.numero)}</b>${(c.questoes||[]).length?`<br><span class="small">📝 ${c.questoes.length} questão(ões)</span>`:""}</td>
+    <td style="white-space:nowrap"><span class="star${c.cobrada?"":" off"}" data-star title="${c.cobrada?"Desmarcar":"Marcar"} como mais cobrada">${c.cobrada?"★":"☆"}</span>${aulasDe(c).length?(()=>{const alvo=$("#jAula").value&&aulasDe(c).includes($("#jAula").value)?$("#jAula").value:(aulasDe(c).length===1?aulasDe(c)[0]:""),on=alvo?essEm(c,alvo):essEm(c);return`<span class="heart${on?"":" off"}" data-heart title="${alvo?(on?"Desmarcar":"Marcar")+" como essencial para "+esc(alvo):"Essencial em "+(c.essAulas||[]).length+" de "+aulasDe(c).length+" aula(s) – clique para editar"}">${on?"♥":"♡"}</span>`})():""}<b>${esc(c.tipo)} ${esc(c.numero)}</b>${(c.questoes||[]).length?`<br><span class="small">📝 ${c.questoes.length} questão(ões)</span>`:""}</td>
     <td>${esc(c.assunto)}${c.tese?"":' <span class="small">(sem tese)</span>'}${(c.tags||[]).length?`<br>${c.tags.map(t=>`<span class="small" style="color:var(--pri)">#${esc(t)}</span>`).join(" ")}`:""}</td>
-    <td>${esc(c.disciplina||"—")}${(c.outras||[]).length?`<br><span class="small">+ ${c.outras.map(o=>esc(o.disciplina)).join(", ")}</span>`:""}</td><td>${esc(c.tema)}${temasDe(c).filter(m=>m!==c.tema).length?`<br><span class="small">+ ${temasDe(c).filter(m=>m!==c.tema).map(esc).join(", ")}</span>`:""}</td><td>${esc(c.aula||"—")}</td>
+    <td>${esc(c.disciplina||"—")}${(c.outras||[]).length?`<br><span class="small">+ ${c.outras.map(o=>esc(o.disciplina)).join(", ")}</span>`:""}</td><td>${esc(c.tema)}${temasDe(c).filter(m=>m!==c.tema).length?`<br><span class="small">+ ${temasDe(c).filter(m=>m!==c.tema).map(esc).join(", ")}</span>`:""}</td><td>${aulasDe(c).length?aulasDe(c).map(a=>`${esc(a)}${essEm(c,a)?' <span style="color:#e0457b">♥</span>':""}`).join("<br>"):"—"}</td>
     <td style="white-space:nowrap"><span class="dot" style="color:${cor};background:${cor}"></span>${s}</td>
     <td style="white-space:nowrap"><span style="color:var(--ok)">${c.srs.ok}</span> / <span style="color:var(--bad)">${c.srs.err}</span></td>
     <td style="white-space:nowrap">${fmt(c.srs.due)}</td><td><button class="btn s">Editar</button></td></tr>`}).join("")||`<tr><td colspan="9" class="empty">Nenhuma jurisprudência encontrada.</td></tr>`;
@@ -1375,7 +1387,10 @@ function renderLista(){
 $("#lista").onclick=e=>{
   const st=e.target.closest("[data-star]"),tr=e.target.closest("tr[data-id]");if(!tr)return;
   if(st){const c=db.cards.find(x=>x.id===tr.dataset.id);c.cobrada=!c.cobrada;salvar();renderLista();return}
-  if(e.target.closest("[data-heart]")){const c=db.cards.find(x=>x.id===tr.dataset.id);c.essencial=!c.essencial;salvar();renderLista();toast(c.essencial?`♥ Essencial para ${c.aula}`:"Desmarcada");return}
+  if(e.target.closest("[data-heart]")){const c=db.cards.find(x=>x.id===tr.dataset.id),al=aulasDe(c),f=$("#jAula").value;
+    const alvo=f&&al.includes(f)?f:(al.length===1?al[0]:"");
+    if(!alvo){editar(c.id);toast("Marque o ♥ na aula desejada");return}
+    const on=essEm(c,alvo);setAulas(c,al,on?c.essAulas.filter(a=>a!==alvo):[...(c.essAulas||[]),alvo]);salvar();renderLista();toast(on?"Desmarcada":`♥ Essencial para ${alvo}`);return}
   editar(tr.dataset.id);
 };
 $$("#tabJ th[data-o]").forEach(th=>th.onclick=()=>{
@@ -1413,8 +1428,22 @@ function addETag(v){String(v||"").split(/[,;\s]+/).map(limparTag).filter(Boolean
 $("#eTagsBox").onclick=e=>{const b=e.target.closest("[data-tr]");if(b){eTags.splice(+b.dataset.tr,1);renderETags()}};
 $("#eTagAdd").onclick=()=>addETag($("#eTagNova").value);
 $("#eTagNova").onkeydown=e=>{if(e.key==="Enter"||e.key===","){e.preventDefault();addETag($("#eTagNova").value)}};
-function atualizarEss(){const a=$("#eAula").value;$("#eEss").disabled=!a;$("#eEssTxt").innerHTML=a?`♥ Essencial para a aula <b>${esc(a)}</b>`:"♥ Essencial para a aula <span class='small'>(escolha a aula)</span>";if(!a)$("#eEss").checked=false}
-$("#eAula").onchange=atualizarEss;
+let eAulasSel=[],eEssSel=[];
+function renderEAulas(){
+  const f=norm($("#eAulaBusca").value),al=[...new Set([...aulasLista(),...eAulasSel])].sort(cmp);
+  const vis=al.filter(a=>eAulasSel.includes(a)||!f||norm(a).includes(f));
+  $("#eAulas").innerHTML=vis.map(a=>{const on=eAulasSel.includes(a),h=eEssSel.includes(a);
+    return`<span class="chip aula${on?" on":""}" data-au="${esc(a)}" title="${on?"Clique para desmarcar a aula":"Clique para vincular a aula"}">${on?"✓ ":""}${esc(a)}${on?`<button type="button" class="hz${h?" on":""}" data-hz="${esc(a)}" title="${h?"Desmarcar":"Marcar"} como essencial nesta aula">${h?"♥":"♡"}</button>`:""}</span>`}).join("")
+    ||`<span class="small">${al.length?"Nenhuma aula encontrada – use “＋ Nova aula” para cadastrar.":"Nenhuma aula cadastrada – digite o nome e clique em “＋ Nova aula”."}</span>`;
+  $("#eAulasRes").innerHTML=eAulasSel.length?`${eAulasSel.length} aula(s): ${eAulasSel.map(a=>esc(a)+(eEssSel.includes(a)?' <span style="color:#e0457b">♥</span>':"")).join(" · ")}`:"Nenhuma aula vinculada.";
+}
+$("#eAulas").onclick=e=>{
+  const hz=e.target.closest("[data-hz]");if(hz){e.stopPropagation();const a=hz.dataset.hz;eEssSel=eEssSel.includes(a)?eEssSel.filter(x=>x!==a):[...eEssSel,a];renderEAulas();return}
+  const ch=e.target.closest("[data-au]");if(!ch)return;const a=ch.dataset.au;
+  if(eAulasSel.includes(a)){eAulasSel=eAulasSel.filter(x=>x!==a);eEssSel=eEssSel.filter(x=>x!==a)}else eAulasSel.push(a);renderEAulas()};
+$("#eAulaBusca").oninput=renderEAulas;
+$("#eAulaBusca").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();const f=norm($("#eAulaBusca").value);if(!f)return;const m=aulasLista().filter(a=>norm(a).includes(f));
+  if(m.length===1&&!eAulasSel.includes(m[0])){eAulasSel.push(m[0]);$("#eAulaBusca").value="";renderEAulas()}else $("#eNovaAula").click()}};
 const parseAlts=t=>String(t||"").split("\n").map(x=>x.trim()).filter(Boolean).map((x,i)=>{const m=x.match(/^([A-Ea-e])\s*[)\.\-–:]\s*(.*)$/);return{l:m?m[1].toUpperCase():"ABCDE"[i],t:m?m[2]:x}});
 function renderEQst(){
   $("#eQst").innerHTML=eQst.map((q,i)=>`<div class="q"><span><b>${q.tipo==="ce"?"C/E":"Múltipla escolha"}</b>${q.banca?` · ${esc(q.banca)}`:""} · gabarito <b>${esc(q.gab)}</b>${(q.ok||q.err)?` · ${q.ok||0} acerto(s) / ${q.err||0} erro(s)`:""}<br><span class="small">${esc(q.enun.slice(0,160))}${q.enun.length>160?"…":""}</span></span>
@@ -1465,22 +1494,22 @@ $("#eBlocos").onclick=e=>{
 $("#eBlocos").onchange=e=>{const sl=e.target.closest("[data-bd]");if(!sl)return;const b=eBlocos[+sl.dataset.bd];b.d=sl.value;b.pri="";b.rel=[];renderBlocos()};
 $("#eBlocos").onkeydown=e=>{const i=e.target.dataset&&e.target.dataset.bn;if(i!==undefined&&e.key==="Enter"){e.preventDefault();document.querySelector(`[data-badd="${i}"]`).click()}};
 $("#eAddDisc").onclick=()=>{const livres=discs().filter(x=>!eBlocos.some(b=>b.d===x));if(!livres.length){toast("Todas as disciplinas já foram adicionadas – cadastre outras em Configurações");return}eBlocos.push({d:"",pri:"",rel:[]});renderBlocos()};
-function fillEAula(v){const al=aulasLista();if(v&&!al.includes(v))al.push(v);$("#eAula").innerHTML=`<option value="">— sem aula —</option>`+al.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");$("#eAula").value=v||""}
-$("#eNovaAula").onclick=()=>{const v=(prompt("Nome da nova aula:")||"").trim();if(!v)return;const ex=aulasLista().find(a=>norm(a)===norm(v));if(!ex){db.aulas.push(v);db.aulas.sort(cmp);salvar();toast(`Aula “${v}” cadastrada`)}fillEAula(ex||v);atualizarEss()};
+$("#eNovaAula").onclick=()=>{const v=($("#eAulaBusca").value.trim()||prompt("Nome da nova aula:")||"").trim();if(!v)return;const ex=aulasLista().find(a=>norm(a)===norm(v));
+  if(!ex){db.aulas.push(v);db.aulas.sort(cmp);salvar();toast(`Aula “${v}” cadastrada e vinculada`)}const a=ex||v;if(!eAulasSel.includes(a))eAulasSel.push(a);$("#eAulaBusca").value="";renderEAulas()};
 function editar(id){
   editId=id;const c=db.cards.find(x=>x.id===id)||novoCartao({disciplina:discs()[0]||""});
   $("#dlgT").textContent=id?"Editar jurisprudência":"Nova jurisprudência";$("#eDel").style.display=id?"":"none";
   if(![...$("#eTipo").options].some(o=>o.value===c.tipo))$("#eTipo").add(new Option(c.tipo));
   eBlocos=[{d:c.disciplina,pri:c.tema&&c.tema!==SEM?c.tema:"",rel:[...(c.temasRel||[])]},...(c.outras||[]).map(o=>({d:o.disciplina,pri:o.tema&&o.tema!==SEM?o.tema:"",rel:[...(o.temasRel||[])]}))];renderBlocos();
   eParSel=[...(c.pares||[])];renderEPares();$("#eParNovo").value="";eTags=[...(c.tags||[])];renderETags();eQst=JSON.parse(JSON.stringify(c.questoes||[]));limparQForm();
-  $("#eTipo").value=c.tipo;$("#eNum").value=c.numero;$("#eAss").value=c.assunto;$("#eTese").value=c.tese;$("#eFalsas").value=c.falsas||"";fillEAula(c.aula);$("#eEss").checked=!!c.essencial;atualizarEss();$("#eCob").checked=!!c.cobrada;$("#eFonte").value=c.fonte;$("#eObs").value=c.obs;
+  $("#eTipo").value=c.tipo;$("#eNum").value=c.numero;$("#eAss").value=c.assunto;$("#eTese").value=c.tese;$("#eFalsas").value=c.falsas||"";eAulasSel=[...aulasDe(c)];eEssSel=[...(c.essAulas||[])];$("#eAulaBusca").value="";renderEAulas();$("#eCob").checked=!!c.cobrada;$("#eFonte").value=c.fonte;$("#eObs").value=c.obs;
   $("#eInfo").textContent=id?`Acertos ${c.srs.ok} · Erros ${c.srs.err} · Última revisão ${fmt(c.srs.last)}`:"";
   $("#dlg").showModal();
 }
 $("#eSalvar").onclick=()=>{
   if($("#eTagNova").value.trim())addETag($("#eTagNova").value);
   if($("#qEnun").value.trim()&&confirm("Há uma questão preenchida e não adicionada. Adicionar antes de salvar?")){$("#qSalvar").click();if($("#qEnun").value.trim())return}
-  const v={tags:[...eTags],questoes:eQst,essencial:$("#eEss").checked&&!!$("#eAula").value,falsas:$("#eFalsas").value.trim(),cobrada:$("#eCob").checked,tipo:$("#eTipo").value,numero:$("#eNum").value.trim(),assunto:$("#eAss").value.trim(),tese:$("#eTese").value.trim(),tema:eBlocos[0].pri||SEM,temasRel:eBlocos[0].rel.filter(m=>m!==eBlocos[0].pri),disciplina:eBlocos[0].d,outras:eBlocos.slice(1).filter(b=>b.d&&b.d!==eBlocos[0].d).map(b=>({disciplina:b.d,tema:b.pri||SEM,temasRel:b.rel.filter(m=>m!==b.pri)})),aula:$("#eAula").value,fonte:$("#eFonte").value.trim(),obs:$("#eObs").value.trim()};
+  const v={tags:[...eTags],questoes:eQst,aulas:[...eAulasSel],essAulas:eEssSel.filter(a=>eAulasSel.includes(a)),essencial:eEssSel.some(a=>eAulasSel.includes(a)),falsas:$("#eFalsas").value.trim(),cobrada:$("#eCob").checked,tipo:$("#eTipo").value,numero:$("#eNum").value.trim(),assunto:$("#eAss").value.trim(),tese:$("#eTese").value.trim(),tema:eBlocos[0].pri||SEM,temasRel:eBlocos[0].rel.filter(m=>m!==eBlocos[0].pri),disciplina:eBlocos[0].d,outras:eBlocos.slice(1).filter(b=>b.d&&b.d!==eBlocos[0].d).map(b=>({disciplina:b.d,tema:b.pri||SEM,temasRel:b.rel.filter(m=>m!==b.pri)})),aula:eAulasSel[0]||"",fonte:$("#eFonte").value.trim(),obs:$("#eObs").value.trim()};
   if(!v.numero||!v.assunto){toast("Informe ao menos Número e Assunto");return}
   if(v.disciplina&&v.tema===SEM&&!confirm("A matéria principal está pendente de classificação. Salvar assim mesmo?"))return;
   const dup=db.cards.find(x=>x.id!==editId&&chave(x)===chave(v));
@@ -1489,7 +1518,7 @@ $("#eSalvar").onclick=()=>{
   {const card=editId?db.cards.find(x=>x.id===editId):db.cards[db.cards.length-1];const ant=new Set(card.pares||[]);
    [...ant].filter(id=>!eParSel.includes(id)).forEach(id=>vincular(card,cardPor(id),false));
    eParSel.forEach(id=>vincular(card,cardPor(id),true));}
-  addTax(v.disciplina,v.tema);v.temasRel.forEach(m=>addTax(v.disciplina,m));v.outras.forEach(o=>{addTax(o.disciplina,o.tema);o.temasRel.forEach(m=>addTax(o.disciplina,m))});if(v.aula&&!db.aulas.includes(v.aula)){db.aulas.push(v.aula);db.aulas.sort(cmp)}salvar();$("#dlg").close();refresh();toast("Jurisprudência salva");
+  addTax(v.disciplina,v.tema);v.temasRel.forEach(m=>addTax(v.disciplina,m));v.outras.forEach(o=>{addTax(o.disciplina,o.tema);o.temasRel.forEach(m=>addTax(o.disciplina,m))});v.aulas.forEach(a=>{if(!db.aulas.includes(a))db.aulas.push(a)});db.aulas.sort(cmp);salvar();$("#dlg").close();refresh();toast("Jurisprudência salva");
 };
 $("#eDel").onclick=()=>{if(confirm("Excluir esta jurisprudência?")){db.cards=db.cards.filter(x=>x.id!==editId);db.cards.forEach(x=>x.pares=(x.pares||[]).filter(i=>i!==editId));salvar();$("#dlg").close();refresh()}};
 $("#eCanc").onclick=()=>$("#dlg").close();
@@ -1622,7 +1651,7 @@ function renderDiario(){
   const grupos=new Map();ev.forEach(e=>{if(!grupos.has(e.id))grupos.set(e.id,[]);grupos.get(e.id).push(e)});
   $("#dCont").textContent=`${ev.length} resposta(s) · ${grupos.size} jurisprudência(s)`;
   $("#dLista").innerHTML=grupos.size?[...grupos.entries()].map(([id,es])=>{const c=cardPor(id),okc=es.filter(acerto).length;
-    return`<div class="dj"><header><div><b data-ed="${id}" style="cursor:pointer">${esc(c.tipo)} ${esc(c.numero)}</b> – ${esc(c.assunto)}<div style="margin-top:6px">${tagsDisc(c)}${c.aula?`<span class="tag">📚 ${esc(c.aula)}</span>`:""}</div></div>
+    return`<div class="dj"><header><div><b data-ed="${id}" style="cursor:pointer">${esc(c.tipo)} ${esc(c.numero)}</b> – ${esc(c.assunto)}<div style="margin-top:6px">${tagsDisc(c)}${aulasDe(c).map(a=>`<span class="tag">📚 ${esc(a)}</span>`).join("")}</div></div>
       <span class="small">${okc}/${es.length} acerto(s) · situação: ${situacao(c)[0]} · próxima: ${fmt(c.srs.due)}</span></header>
       ${es.map(e=>{const okk=acerto(e),idx=(db.diario[diaSel]||[]).indexOf(e),opts=okk?MOT_OK:MOT_ERR;
         const bd=e.modo==="qst"||e.modo==="ce"||e.modo==="par"&&e.papel!=="confundida"?`<span class="bdg ${okk?"b2":"b0"}">${okk?"Acertou":"Errou"}</span>`:`<span class="bdg b${e.r}">${RES[e.r]}</span>`;
@@ -1713,7 +1742,7 @@ function renderMapa(){
   const antigas=cards.filter(c=>c.srs.last).sort((a,b)=>a.srs.last.localeCompare(b.srs.last)).slice(0,12);
   $("#gAntigas").innerHTML=antigas.length?`<table><tr><th>Jurisprudência</th><th>Matéria</th><th>Última</th><th>Dias</th></tr>${antigas.map(c=>`<tr data-id="${c.id}" style="cursor:pointer"><td><b>${esc(c.tipo)} ${esc(c.numero)}</b><br><span class="small">${esc(c.assunto)}</span></td><td>${esc(c.tema)}</td><td>${fmt(c.srs.last)}</td><td><b>${diasEntre(c.srs.last,t)}</b></td></tr>`).join("")}</table>`:'<p class="small">Nenhuma revisão registrada ainda.</p>';
   const err=cards.filter(c=>c.srs.err>0).sort((a,b)=>b.srs.err-a.srs.err).slice(0,12);
-  $("#gErr").innerHTML=err.length?`<table><tr><th>Jurisprudência</th><th>Aula</th><th>A</th><th>E</th></tr>${err.map(c=>`<tr data-id="${c.id}" style="cursor:pointer"><td><b>${esc(c.tipo)} ${esc(c.numero)}</b><br><span class="small">${esc(c.assunto)}</span></td><td>${esc(c.aula||"—")}</td><td style="color:var(--ok)">${c.srs.ok}</td><td style="color:var(--bad)"><b>${c.srs.err}</b></td></tr>`).join("")}</table>`:'<p class="small">Nenhum erro registrado ainda.</p>';
+  $("#gErr").innerHTML=err.length?`<table><tr><th>Jurisprudência</th><th>Aula</th><th>A</th><th>E</th></tr>${err.map(c=>`<tr data-id="${c.id}" style="cursor:pointer"><td><b>${esc(c.tipo)} ${esc(c.numero)}</b><br><span class="small">${esc(c.assunto)}</span></td><td>${esc(aulasDe(c).join(" · ")||"—")}</td><td style="color:var(--ok)">${c.srs.ok}</td><td style="color:var(--bad)"><b>${c.srs.err}</b></td></tr>`).join("")}</table>`:'<p class="small">Nenhum erro registrado ainda.</p>';
 }
 $("#mDisc").onchange=renderMapa;$("#mPer").onchange=renderMapa;
 ["#gAntigas","#gErr"].forEach(s=>$(s).onclick=e=>{const tr=e.target.closest("tr[data-id]");if(tr)editar(tr.dataset.id)});
@@ -1750,7 +1779,7 @@ $("#taxList").onclick=e=>{
 };
 function renderAulas(){
   const al=aulasLista();
-  $("#aulaList").innerHTML=al.map((a,i)=>`<span class="chip">${esc(a)} <span class="small">(${db.cards.filter(c=>c.aula===a).length}${db.cards.some(c=>c.aula===a&&c.essencial)?` · ♥ ${db.cards.filter(c=>c.aula===a&&c.essencial).length}`:""})</span><button title="Renomear" data-ar="${i}">✎</button><button title="Excluir" data-ad="${i}">✕</button></span>`).join("")||'<span class="small">Nenhuma aula cadastrada.</span>';
+  $("#aulaList").innerHTML=al.map((a,i)=>`<span class="chip">${esc(a)} <span class="small">(${db.cards.filter(c=>aulasDe(c).includes(a)).length}${db.cards.some(c=>essEm(c,a))?` · ♥ ${db.cards.filter(c=>essEm(c,a)).length}`:""})</span><button title="Renomear" data-ar="${i}">✎</button><button title="Excluir" data-ad="${i}">✕</button></span>`).join("")||'<span class="small">Nenhuma aula cadastrada.</span>';
 }
 function renderTagsCfg(){
   const ts=todasTags();
@@ -1764,10 +1793,10 @@ $("#addAula").onclick=()=>{const vs=$("#novaAula").value.split(/[;\n]/).map(x=>x
   vs.forEach(v=>{if(!db.aulas.some(a=>norm(a)===norm(v))){db.aulas.push(v);n++}});db.aulas.sort(cmp);$("#novaAula").value="";salvar();refresh();toast(n?`${n} aula(s) adicionada(s)`:"Aula(s) já cadastrada(s)")};
 $("#aulaList").onclick=e=>{const b=e.target.closest("button");if(!b)return;const al=aulasLista();
   if(b.dataset.ar!==undefined){const a=al[+b.dataset.ar],v=(prompt("Novo nome da aula:",a)||"").trim();if(!v||v===a)return;
-    db.aulas=[...new Set(db.aulas.map(x=>x===a?v:x).concat(db.aulas.includes(a)?[]:[v]))].sort(cmp);db.cards.forEach(c=>{if(c.aula===a)c.aula=v})}
-  if(b.dataset.ad!==undefined){const a=al[+b.dataset.ad],n=db.cards.filter(c=>c.aula===a).length;
-    if(!confirm(`Excluir a aula “${a}”?${n?`\n${n} jurisprudência(s) ficarão sem aula.`:""}`))return;
-    db.aulas=db.aulas.filter(x=>x!==a);db.cards.forEach(c=>{if(c.aula===a){c.aula="";c.essencial=false}})}
+    db.aulas=[...new Set(db.aulas.map(x=>x===a?v:x).concat(db.aulas.includes(a)?[]:[v]))].sort(cmp);db.cards.forEach(c=>{if(aulasDe(c).includes(a))setAulas(c,aulasDe(c).map(x=>x===a?v:x),(c.essAulas||[]).map(x=>x===a?v:x))})}
+  if(b.dataset.ad!==undefined){const a=al[+b.dataset.ad],n=db.cards.filter(c=>aulasDe(c).includes(a)).length;
+    if(!confirm(`Excluir a aula “${a}”?${n?`\n${n} jurisprudência(s) perderão o vínculo com esta aula.`:""}`))return;
+    db.aulas=db.aulas.filter(x=>x!==a);db.cards.forEach(c=>{if(aulasDe(c).includes(a))setAulas(c,aulasDe(c).filter(x=>x!==a),(c.essAulas||[]).filter(x=>x!==a))})}
   salvar();refresh()};
 $$("#cfgTabs button").forEach(b=>b.onclick=()=>{$$("#cfgTabs button").forEach(x=>x.classList.toggle("on",x===b));$$("#config .sub").forEach(s=>s.classList.toggle("on",s.id===b.dataset.t))});
 
@@ -1781,15 +1810,16 @@ function importarLinhas(linhas){
   const mapa=new Map(db.cards.map(c=>[chave(c),c]));let novos=0,atu=0;
   linhas.slice(hi+1).forEach(r=>{
     if(!r)return;const g=k=>idx[k]!==undefined?String(r[idx[k]]??"").trim():"";
-    const o={tipo:g("tipo")||"Súmula",numero:g("numero"),assunto:g("assunto"),tese:g("tese"),tema:g("tema"),disciplina:g("disciplina"),aula:g("aula"),fonte:g("fonte"),obs:g("obs"),falsas:g("falsas")};
+    const o={tipo:g("tipo")||"Súmula",numero:g("numero"),assunto:g("assunto"),tese:g("tese"),tema:g("tema"),disciplina:g("disciplina"),aula:"",fonte:g("fonte"),obs:g("obs"),falsas:g("falsas")};
     const tgV=g("tags");if(tgV)o.tags=tgV.split(/[,;\s]+/).map(limparTag).filter(Boolean);
-    const esV=g("essencial");if(esV)o.essencial=/^(s|sim|x|1|true|♥)/i.test(esV);
+    const auV=g("aula"),auL=auV?auV.split(/[;|\n]/).map(x=>x.trim()).filter(Boolean):null;if(auL){o.aulas=auL;o.aula=auL[0]}
+    const esV=g("essencial");let esL=null;if(esV){esL=/^(s|sim|x|1|true|♥)$/i.test(esV.trim())?(auL||null):esV.split(/[;|\n]/).map(x=>x.trim()).filter(Boolean);o.essAulas=esL||[];o.essencial=!!(esL&&esL.length)}
     const outV=g("outras");if(outV)o.outras=outV.split("|").map(x=>{const[d,r]=x.split(">");const ms=(r||"").split(";").map(y=>y.trim()).filter(Boolean);return{disciplina:(d||"").trim(),tema:ms[0]||SEM,temasRel:ms.slice(1)}}).filter(x=>x.disciplina);
     const relV=g("temasRel");if(relV)o.temasRel=relV.split(/[;|]/).map(x=>x.trim()).filter(Boolean);
     const cobV=g("cobrada");o.cobrada=/^(s|sim|x|1|true|★|⭐)/i.test(cobV);
     if(!o.numero)return;
     const ex=mapa.get(chave(o));
-    if(ex){for(const k of["assunto","tese","tema","disciplina","aula","fonte","obs","falsas"])if(o[k])ex[k]=o[k];if(cobV)ex.cobrada=o.cobrada;if(o.outras)ex.outras=o.outras;if(o.tags)ex.tags=[...new Set([...(ex.tags||[]),...o.tags])];if(esV)ex.essencial=o.essencial&&!!ex.aula;if(o.temasRel){ex.temasRel=o.temasRel;o.temasRel.forEach(m=>addTax(ex.disciplina,m))}addTax(ex.disciplina,ex.tema);atu++}
+    if(ex){if(auL)setAulas(ex,[...aulasDe(ex),...auL],ex.essAulas||[]);for(const k of["assunto","tese","tema","disciplina","fonte","obs","falsas"])if(o[k])ex[k]=o[k];if(cobV)ex.cobrada=o.cobrada;if(o.outras)ex.outras=o.outras;if(o.tags)ex.tags=[...new Set([...(ex.tags||[]),...o.tags])];if(esV)setAulas(ex,aulasDe(ex),esL===null?aulasDe(ex):[...new Set([...(ex.essAulas||[]),...esL])]);if(o.temasRel){ex.temasRel=o.temasRel;o.temasRel.forEach(m=>addTax(ex.disciplina,m))}addTax(ex.disciplina,ex.tema);atu++}
     else{const c=novoCartao(o);db.cards.push(c);mapa.set(chave(c),c);addTax(c.disciplina,c.tema);(c.temasRel||[]).forEach(m=>addTax(c.disciplina,m));novos++}
   });
   salvar();refresh();toast(`${novos} novas · ${atu} atualizadas`);
@@ -1816,8 +1846,8 @@ $("#arq").onchange=e=>{
 function baixar(nome,conteudo,tipo){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([conteudo],{type:tipo}));a.download=nome;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 $("#expJson").onclick=()=>baixar(`flashsun_backup_${iso(hoje())}.json`,JSON.stringify(db,null,1),"application/json");
 function planilha(linhas,nome){if(typeof XLSX==="undefined"){toast("Biblioteca do Excel não carregou");return}const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(linhas),"Jurisprudencias");XLSX.writeFile(wb,nome)}
-$("#expXlsx").onclick=()=>planilha([["Tipo","Número","Assunto","Tese","Disciplina","Matéria","Matérias relacionadas","Outras disciplinas","Aula","Essencial na aula","Etiquetas","Questões de prova","Fonte","Observações","Pegadinhas","Mais cobrada","Situação","Acertos","Erros","Última revisão","Próxima revisão"],...db.cards.map(c=>[c.tipo,c.numero,c.assunto,c.tese,c.disciplina,c.tema,(c.temasRel||[]).join("; "),(c.outras||[]).map(o=>o.disciplina+" > "+[o.tema,...o.temasRel].join("; ")).join(" | "),c.aula,c.essencial?"Sim":"",(c.tags||[]).map(t=>"#"+t).join(" "),(c.questoes||[]).length,c.fonte,c.obs,c.falsas||"",c.cobrada?"Sim":"",situacao(c)[0],c.srs.ok,c.srs.err,fmt(c.srs.last),fmt(c.srs.due)])],`flashsun_${iso(hoje())}.xlsx`);
-$("#modelo").onclick=()=>planilha([["Tipo","Número","Assunto","Tese","Disciplina","Matéria","Aula","Fonte","Observações","Mais cobrada"],["Súmula","85","Compensação de jornada","(cole aqui o enunciado)","Direito do Trabalho","Duração do trabalho","Aula 05","TST","","Sim"]],"modelo_flashsun.xlsx");
+$("#expXlsx").onclick=()=>planilha([["Tipo","Número","Assunto","Tese","Disciplina","Matéria","Matérias relacionadas","Outras disciplinas","Aula","Essencial na aula","Etiquetas","Questões de prova","Fonte","Observações","Pegadinhas","Mais cobrada","Situação","Acertos","Erros","Última revisão","Próxima revisão"],...db.cards.map(c=>[c.tipo,c.numero,c.assunto,c.tese,c.disciplina,c.tema,(c.temasRel||[]).join("; "),(c.outras||[]).map(o=>o.disciplina+" > "+[o.tema,...o.temasRel].join("; ")).join(" | "),aulasDe(c).join("; "),(c.essAulas||[]).join("; "),(c.tags||[]).map(t=>"#"+t).join(" "),(c.questoes||[]).length,c.fonte,c.obs,c.falsas||"",c.cobrada?"Sim":"",situacao(c)[0],c.srs.ok,c.srs.err,fmt(c.srs.last),fmt(c.srs.due)])],`flashsun_${iso(hoje())}.xlsx`);
+$("#modelo").onclick=()=>planilha([["Tipo","Número","Assunto","Tese","Disciplina","Matéria","Aula","Essencial na aula","Fonte","Observações","Mais cobrada"],["Súmula","85","Compensação de jornada","(cole aqui o enunciado)","Direito do Trabalho","Duração do trabalho","Aula 05; Aula 09","Aula 05","TST","","Sim"]],"modelo_flashsun.xlsx");
 $("#zerarProg").onclick=()=>{if(confirm("Zerar todo o histórico de revisões?")){db.cards.forEach(c=>c.srs=srsNovo());db.log={};db.cfg.lacStats={ok:0,tot:0};salvar();refresh();toast("Progresso zerado")}};
 $("#apagar").onclick=()=>{if(confirm("Apagar TODAS as jurisprudências? Faça um backup antes.")){db.cards=[];db.log={};salvar();refresh()}};
 
@@ -1973,10 +2003,10 @@ function importarCandidatos(){
       const ex=mapa.get(chave(c));
       if(ex){
         if(tese&&($("#pSobre").checked||!ex.tese)){ex.tese=tese;if(c.fonte)ex.fonte=c.fonte}
-        if(ass&&!ex.assunto)ex.assunto=ass;if(aula&&!ex.aula)ex.aula=aula;
+        if(ass&&!ex.assunto)ex.assunto=ass;if(aula&&!aulasDe(ex).includes(aula))setAulas(ex,[...aulasDe(ex),aula],ex.essAulas||[]);
         if(c.obs&&!(ex.obs||"").includes(c.obs))ex.obs=[ex.obs,c.obs].filter(Boolean).join(" · ");
         a++;
-      }else{const nc=novoCartao({tipo:c.tipo,numero:c.numero,assunto:ass||"(sem assunto)",tese,tema,disciplina:disc,aula,fonte:c.fonte||"Importado de PDF",obs:c.obs||""});db.cards.push(nc);mapa.set(chave(nc),nc);n++}
+      }else{const nc=novoCartao({tipo:c.tipo,numero:c.numero,assunto:ass||"(sem assunto)",tese,tema,disciplina:disc,aula,aulas:aula?[aula]:[],fonte:c.fonte||"Importado de PDF",obs:c.obs||""});db.cards.push(nc);mapa.set(chave(nc),nc);n++}
     });
     addTax(disc,tema);
     const ok=salvar();refresh();$("#pPrev").innerHTML="";
