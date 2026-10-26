@@ -220,7 +220,6 @@ dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(2px)}
 .clock .sep2{width:1px;height:14px;background:var(--bd)}
 .clock .hr{font-weight:700;color:var(--tx);font-variant-numeric:tabular-nums}
 @media(max-width:860px){
-  /* gaveta lateral no celular */
   .side,body.mini .side{position:fixed!important;top:0;left:0;bottom:0;height:100%;height:100dvh;width:min(82vw,300px)!important;padding:20px 14px calc(16px + env(safe-area-inset-bottom))!important;
     flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:0;z-index:60;transform:translateX(-105%);transition:transform .28s ease;overflow-y:auto;box-shadow:none}
   body.menuAberto .side{transform:none;box-shadow:8px 0 40px rgba(0,0,0,.45)}
@@ -231,7 +230,6 @@ dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(2px)}
   .side .nav .lbl,body.mini .side .nav .lbl{display:inline!important}
   .side .sidefoot,body.mini .side .sidefoot{display:block!important;margin-top:auto;padding-top:16px}
   main,body.mini main{margin-left:0!important;padding:0 14px 30px!important}
-  .mbar-top{display:flex}
   .topbar{margin:12px 0 12px}
   .title h2{font-size:17px}
   .box{padding:14px}
@@ -278,6 +276,24 @@ mark.df{background:rgba(250,204,21,.30);color:inherit;border-radius:3px;padding:
 body.menuAberto .veu{opacity:1;pointer-events:auto}
 body.menuAberto{overflow:hidden}
 @media(max-width:860px){.mbar-top{display:flex}}
+.chip.sel.prin{background:linear-gradient(135deg,var(--warn),#e0a43a);color:#1a1205;border-color:transparent;font-weight:700;box-shadow:0 0 8px rgba(201,138,18,.45)}
+.blk{margin-bottom:10px}.blk .hd{display:flex;gap:6px;align-items:center;margin-bottom:8px;flex-wrap:nowrap}
+.blk .hd select{flex:1;min-width:0}
+.leg{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mut);margin:0 0 8px}
+.leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+/* revisões do dia */
+.dnav{display:flex;gap:8px;align-items:end;flex-wrap:wrap}
+.dj{border:1px solid var(--bd);border-radius:14px;padding:12px 14px;margin:10px 0;background:var(--card2)}
+.dj>header{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-bottom:6px}
+.dj>header b{color:var(--pri)}
+.tent{display:grid;grid-template-columns:58px 120px 110px 1fr minmax(170px,230px);gap:10px;align-items:center;padding:8px 0;border-top:1px dashed var(--bd);font-size:13px}
+.tent:first-of-type{border-top:0}
+.bdg{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.03em;text-align:center}
+.b0{background:rgba(192,57,43,.15);color:var(--bad)}.b1{background:rgba(201,138,18,.18);color:var(--warn)}.b2{background:rgba(46,139,87,.16);color:var(--ok)}.b3{background:rgba(42,111,151,.16);color:var(--easy)}
+.bm{background:var(--chip);color:var(--pri)}
+.tent .mot{line-height:1.45}.tent .mot small{color:var(--mut)}
+.tent select,.tent input{width:100%;font-size:12px;padding:5px 7px}
+@media(max-width:860px){.tent{grid-template-columns:52px 1fr;gap:6px}.tent .mot,.tent .usr{grid-column:1/-1}}
 .toast{position:fixed;bottom:22px;right:22px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--btntx);padding:11px 18px;border-radius:10px;opacity:0;transition:.3s;pointer-events:none;box-shadow:0 0 20px var(--glow);z-index:20}
 .toast.on{opacity:1}
 .mbar{height:10px;background:var(--bd);border-radius:6px;overflow:hidden;margin-top:12px}
@@ -294,6 +310,22 @@ body.menuAberto{overflow:hidden}
 #tabJ .ft input,#tabJ .ft select{width:100%;min-width:72px;padding:5px 6px;font-size:12px}
 .star{cursor:pointer;color:var(--warn);font-size:16px;margin-right:5px;text-shadow:0 0 6px var(--glow)}
 .star.off{color:var(--mut);opacity:.45;text-shadow:none}
+.heart{cursor:pointer;color:#e0457b;font-size:15px;margin-right:5px;text-shadow:0 0 6px rgba(224,69,123,.45)}
+.heart.off{color:var(--mut);opacity:.4;text-shadow:none}
+.tagbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
+.tagbar .lbl2{font-size:11px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin-right:4px}
+.htag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:12px;border:1px dashed var(--pri);color:var(--pri);background:transparent;cursor:pointer;user-select:none}
+.htag.on{background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--btntx);border-style:solid;border-color:transparent}
+.htag button{border:0;background:transparent;color:inherit;cursor:pointer;padding:0 0 0 2px;font-size:12px}
+.qlist .q{border:1px solid var(--bd);border-radius:10px;padding:8px 10px;margin:6px 0;background:var(--card);font-size:13px;display:flex;gap:8px;justify-content:space-between;align-items:flex-start}
+.qform{display:grid;grid-template-columns:1fr 130px 110px;gap:8px;margin-top:8px}.qform .full{grid-column:1/-1}
+.alts{display:grid;gap:8px;margin-top:14px}
+.alts button{text-align:left;padding:11px 14px;border-radius:10px;border:1px solid var(--bd);background:var(--card2);color:var(--tx);font:inherit;cursor:pointer;line-height:1.45}
+.alts button:hover{border-color:var(--pri);box-shadow:0 0 10px var(--glow)}
+.alts button.ok{border-color:var(--ok);background:rgba(46,139,87,.16)}.alts button.er{border-color:var(--bad);background:rgba(192,57,43,.14)}
+.rel7{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.rel7 ol{margin:6px 0 0 18px;padding:0;font-size:13px;line-height:1.7}
+@media(max-width:860px){.qform{grid-template-columns:1fr}}
 .icons{display:flex;gap:12px;flex-wrap:wrap}
 .icoOpt{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 10px;width:128px;border:1px solid var(--bd);border-radius:12px;background:var(--card2);cursor:pointer;font:inherit;font-size:12px;color:var(--tx);text-align:center}
 .icoOpt svg{width:44px;height:44px;color:var(--pri);filter:drop-shadow(0 0 6px var(--glow))}
@@ -324,6 +356,7 @@ mark.mo{background:rgba(46,139,87,.22);color:inherit;border-radius:4px;padding:0
   <div class="logo" id="logo" title="Ocultar / mostrar menu"><div class="sun" id="logoIcon"></div><div class="txt"><b>Flash Sun</b><small>Jurisprudência</small></div><span class="tog">«</span></div>
   <nav class="nav">
     <button data-s="estudar" class="on" title="Estudar"><span class="ic">⚡</span><span class="lbl">Estudar</span></button>
+    <button data-s="diario" title="Revisões do dia"><span class="ic">◷</span><span class="lbl">Revisões do dia</span></button>
     <button data-s="juris" title="Jurisprudências"><span class="ic">⚖</span><span class="lbl">Jurisprudências</span></button>
     <button data-s="peg" title="Pegadinhas"><span class="ic">⚠</span><span class="lbl">Pegadinhas</span></button>
     <button data-s="mapa" title="Mapa de desempenho"><span class="ic">◈</span><span class="lbl">Mapa de desempenho</span></button>
@@ -353,11 +386,13 @@ mark.mo{background:rgba(46,139,87,.22);color:inherit;border-radius:4px;padding:0
       <option value="new">Somente novos</option>
       <option value="erro">Somente os que já errei</option>
       <option value="cob">Somente mais cobradas</option>
+      <option value="ess">Somente ♥ essenciais da aula</option>
       <option value="all">Todos</option></select></label>
-    <label>Modo<select id="fEst"><option value="fc">Flashcard</option><option value="ce">Certo ou Errado (pegadinhas)</option><option value="lac">Lacunas (completar a tese)</option><option value="par">Pares de confusão</option></select></label>
+    <label>Modo<select id="fEst"><option value="fc">Flashcard</option><option value="ce">Certo ou Errado (pegadinhas)</option><option value="qst">Questões de prova (banca)</option><option value="lac">Lacunas (completar a tese)</option><option value="par">Pares de confusão</option></select></label>
     <label>Frente<select id="fDir"><option value="num">Número → tese</option><option value="tese">Tese → número</option></select></label>
     <label>Limite<input id="fLim" type="number" min="1" value="20" style="width:80px"></label>
     <label class="ck" style="padding-bottom:9px"><input type="checkbox" id="fPri"> ★ Priorizar mais cobradas</label>
+    <div class="tagbar" id="fTags" style="flex-basis:100%"></div>
     <label class="ck" style="padding-bottom:9px"><input type="checkbox" id="fDest"> ⚠ Destacar pontos de pegadinha</label>
     <button class="btn p" id="btnIniciar">▶ Iniciar sessão</button>
   </div>
@@ -365,6 +400,28 @@ mark.mo{background:rgba(46,139,87,.22);color:inherit;border-radius:4px;padding:0
 </section>
 
 <!-- ================= JURISPRUDÊNCIAS ================= -->
+<section id="diario" class="sec">
+  <div class="title"><h2>Revisões do dia</h2>
+    <div class="dnav"><button class="btn" id="dAnt" title="Dia anterior">◀</button><label>Dia<input type="date" id="dDia"></label><button class="btn" id="dProx" title="Próximo dia">▶</button><button class="btn" id="dHoje">Hoje</button></div></div>
+  <div class="box" id="relSemana"></div>
+  <div class="kpis" id="kpiDia"></div>
+  <div class="grid2">
+    <div class="box"><h3>Por que acertei / errei</h3><div id="dMot"></div></div>
+    <div class="box"><h3>Resultado por modo de estudo</h3><div id="dModo"></div></div>
+  </div>
+  <div class="box">
+    <div class="row" style="margin-bottom:6px">
+      <label>Resultado<select id="dRes"><option value="">Todos</option><option value="err">Só erros</option><option value="dif">Só difíceis</option><option value="ok">Só acertos</option></select></label>
+      <label>Modo<select id="dMd"><option value="">Todos</option><option value="fc">Flashcard</option><option value="ce">Certo ou Errado</option><option value="lac">Lacunas</option><option value="par">Pares de confusão</option><option value="qst">Questões de prova</option><option value="ant">Registro anterior</option></select></label>
+      <label>Disciplina<select id="dDisc"></select></label>
+      <button class="btn p" id="dRevErr">▶ Revisar as erradas deste dia</button>
+      <span class="small" id="dCont" style="margin-left:auto"></span>
+    </div>
+    <p class="small">Clique na jurisprudência para abrir a edição. Em cada resposta, você pode registrar o <b>motivo</b> do acerto ou do erro – ele alimenta o resumo acima.</p>
+    <div id="dLista"></div>
+  </div>
+</section>
+
 <section id="juris" class="sec">
   <div class="title"><h2>Jurisprudências</h2><button class="btn p" id="btnNovo">＋ Nova jurisprudência</button></div>
   <div class="box">
@@ -375,16 +432,19 @@ mark.mo{background:rgba(46,139,87,.22);color:inherit;border-radius:4px;padding:0
       <label>Tipo<select id="jTipo"></select></label>
       <label>Aula<select id="jAula"></select></label>
       <label>Mais cobradas<select id="jCob"><option value="">Todas</option><option value="s">★ Só mais cobradas</option><option value="n">Não marcadas</option></select></label>
+      <label>Essenciais<select id="jEss"><option value="">Todas</option><option value="s">♥ Essenciais da aula</option><option value="n">Não marcadas</option></select></label>
+      <label>Questões<select id="jQst"><option value="">Todas</option><option value="s">Com questões de prova</option><option value="n">Sem questões</option></select></label>
       <label>Situação<select id="jSit"><option value="">Todas</option><option>Novo</option><option>Aprendendo</option><option>Revisar</option><option>Dominado</option><option value="erro">Com erros</option></select></label>
     </div>
     <div class="row" style="margin-top:12px">
-      <label>Classificar por<select id="jOrd"><option value="num">Número</option><option value="alfa">Ordem alfabética (assunto)</option><option value="tema">Matéria (tema)</option><option value="disc">Disciplina</option><option value="aula">Aula</option><option value="sit">Situação</option><option value="erros">Acertos / erros (mais erros)</option><option value="prox">Próxima revisão</option><option value="cob">Mais cobradas primeiro</option></select></label>
+      <label>Classificar por<select id="jOrd"><option value="num">Número</option><option value="alfa">Ordem alfabética (assunto)</option><option value="tema">Matéria (tema)</option><option value="disc">Disciplina</option><option value="aula">Aula</option><option value="sit">Situação</option><option value="erros">Acertos / erros (mais erros)</option><option value="prox">Próxima revisão</option><option value="cob">Mais cobradas primeiro</option><option value="ess">♥ Essenciais primeiro</option><option value="qst">Mais questões de prova</option></select></label>
       <button class="btn" id="jDir" title="Inverter ordem">↑ Crescente</button>
       <button class="btn" id="jLimpar">Limpar filtros</button>
       <button class="btn" id="jMarcar" title="Marca todas as jurisprudências exibidas">★ Marcar exibidas</button>
       <button class="btn" id="jDesmarcar">☆ Desmarcar exibidas</button>
       <span class="small" id="jCont" style="margin-left:auto"></span>
     </div>
+    <div class="tagbar" id="jTags"></div>
   </div>
   <div class="box tbl"><table id="tabJ"><thead>
     <tr class="hd"><th data-o="num">Tipo / Nº<span class="ar"></span></th><th data-o="alfa">Assunto<span class="ar"></span></th><th data-o="disc">Disciplina<span class="ar"></span></th><th data-o="tema">Matéria<span class="ar"></span></th><th data-o="aula">Aula<span class="ar"></span></th><th data-o="sit">Situação<span class="ar"></span></th><th data-o="erros" title="Acertos / Erros">A / E<span class="ar"></span></th><th data-o="prox">Próx. revisão<span class="ar"></span></th><th></th></tr>
@@ -447,7 +507,7 @@ mark.mo{background:rgba(46,139,87,.22);color:inherit;border-radius:4px;padding:0
 <section id="config" class="sec">
   <div class="title"><h2>Configurações</h2></div>
   <div class="pill" id="cfgTabs">
-    <button data-t="cTax" class="on">Disciplinas e matérias</button>
+    <button data-t="cTax" class="on">Disciplinas, matérias e aulas</button>
     <button data-t="cImp">Importar / Exportar</button>
     <button data-t="cMeta">Meta e lembrete</button>
     <button data-t="cProva">Prova</button>
@@ -462,6 +522,17 @@ mark.mo{background:rgba(46,139,87,.22);color:inherit;border-radius:4px;padding:0
       <div class="row"><label style="flex:1">Nova disciplina<input id="novaDisc" placeholder="Ex.: Direito Processual do Trabalho"></label><button class="btn p" id="addDisc">＋ Adicionar disciplina</button></div>
     </div>
     <div id="taxList"></div>
+    <div class="box">
+      <h3>Aulas</h3>
+      <p class="small">Cadastre as aulas do seu curso. Elas aparecem em lista suspensa na edição da jurisprudência, na importação e nos filtros. Ao renomear, as jurisprudências vinculadas são atualizadas.</p>
+      <div class="row"><label style="flex:1">Nova(s) aula(s) – separe várias com “;” ou uma por linha<textarea id="novaAula" style="min-height:44px" placeholder="Ex.: Aula 01 – Princípios; Aula 02 – Relação de emprego"></textarea></label><button class="btn p" id="addAula">＋ Adicionar</button></div>
+      <div class="chips" id="aulaList" style="margin-top:12px"></div>
+    </div>
+    <div class="box">
+      <h3>Etiquetas</h3>
+      <p class="small">Marcadores livres (ex.: #reforma, #prazo, #TST2025) criados na edição da jurisprudência. Aqui você pode renomear ou excluir em todas as jurisprudências de uma vez.</p>
+      <div class="chips" id="tagList"></div>
+    </div>
   </div>
 
   <div id="cImp" class="sub">
@@ -472,7 +543,7 @@ mark.mo{background:rgba(46,139,87,.22);color:inherit;border-radius:4px;padding:0
         <label>Arquivo PDF<input type="file" id="arqPdf" accept=".pdf"></label>
         <label>Disciplina<select id="pDisc"></select></label>
         <label>Matéria<select id="pTema"></select></label>
-        <label>Aula<input id="pAula" placeholder="Opcional" list="dlAulas"></label>
+        <label>Aula<select id="pAula"></select></label>
       </div>
       <div class="row" style="margin-top:12px;gap:18px">
         <label class="ck"><input type="checkbox" id="pCanc" checked> Ignorar canceladas</label>
@@ -580,20 +651,35 @@ mark.mo{background:rgba(46,139,87,.22);color:inherit;border-radius:4px;padding:0
     <label>Tipo<select id="eTipo"><option>Súmula</option><option>OJ SDI-1</option><option>OJ SDI-2</option><option>OJ SDC</option><option>OJ Transitória</option><option>OJ Tribunal Pleno</option><option>Precedente Normativo</option><option>Tema Repetitivo</option><option>Tema RG (STF)</option><option>Súmula Vinculante</option><option>Súmula STF</option><option>Súmula STJ</option><option>Tese / Informativo</option></select></label>
     <label>Número<input id="eNum"></label>
     <label class="full">Assunto<input id="eAss"></label>
-    <label>Disciplina<select id="eDisc"></select></label>
-    <label>Matéria principal<span class="row" style="flex-wrap:nowrap;gap:6px"><select id="eTema" style="flex:1"></select><button type="button" class="btn s" id="eNovaMat" title="Criar nova matéria nesta disciplina">＋</button></span></label>
-    <div class="full"><label style="margin-bottom:6px">Matérias relacionadas (mesma disciplina) – clique para marcar</label>
-      <div class="relbox"><div class="chips" id="eRel"></div>
-        <div class="row" style="flex-wrap:nowrap;gap:6px"><input id="eRelNova" placeholder="Nova matéria relacionada a esta disciplina" style="flex:1"><button type="button" class="btn s" id="eRelAdd">＋ Incluir</button></div></div></div>
+    <div class="full"><label style="margin-bottom:6px">Disciplinas e matérias</label>
+      <div class="leg"><span><i style="background:var(--warn)"></i>1º clique = matéria principal ★</span><span><i style="background:var(--pri)"></i>cliques seguintes = secundárias ✓</span><span>clique de novo para desmarcar</span></div>
+      <div id="eBlocos"></div>
+      <button type="button" class="btn s" id="eAddDisc">＋ Adicionar outra disciplina</button></div>
     <label class="ck full"><input type="checkbox" id="eCob"> ★ Mais cobrada em provas</label>
+    <div class="full"><label style="margin-bottom:6px">Etiquetas – digite e tecle Enter (ex.: reforma, prazo, TST2025)</label>
+      <div class="relbox"><div class="chips" id="eTagsBox" style="margin-bottom:6px"></div>
+        <div class="row" style="flex-wrap:nowrap;gap:6px"><input id="eTagNova" list="dlTags" placeholder="#etiqueta" style="flex:1"><button type="button" class="btn s" id="eTagAdd">＋ Incluir</button></div></div></div>
+    <datalist id="dlTags"></datalist>
     <div class="sep">Verso</div>
     <label class="full">Tese / enunciado<textarea id="eTese"></textarea></label>
-    <label>Aula<input id="eAula" list="dlAulas" placeholder="Ex.: Aula 05 – Jornada de trabalho"></label>
+    <label>Aula<span class="row" style="flex-wrap:nowrap;gap:6px"><select id="eAula" style="flex:1"></select><button type="button" class="btn s" id="eNovaAula" title="Cadastrar nova aula">＋</button></span></label>
     <label>Fonte<input id="eFonte"></label>
+    <label class="ck full" id="eEssLbl"><input type="checkbox" id="eEss"> <span id="eEssTxt">♥ Essencial para a aula</span></label>
     <label class="full">Observações / pegadinha<input id="eObs"></label>
     <div class="full"><label style="margin-bottom:6px">Pares de confusão – jurisprudências que você costuma confundir com esta</label>
       <div class="relbox"><div class="chips" id="ePares"></div>
         <div class="row" style="flex-wrap:nowrap;gap:6px"><input id="eParNovo" list="dlLab" placeholder="Digite o número ou assunto da outra jurisprudência" style="flex:1"><button type="button" class="btn s" id="eParAdd">＋ Vincular</button></div></div></div>
+    <div class="full"><label style="margin-bottom:6px">Questões de prova (banca) vinculadas</label>
+      <div class="relbox"><div class="qlist" id="eQst"></div>
+        <div class="qform">
+          <input id="qBanca" placeholder="Banca / órgão / ano – ex.: FCC – TRT 8 – 2022">
+          <select id="qTipo"><option value="ce">Certo ou Errado</option><option value="me">Múltipla escolha</option></select>
+          <input id="qGab" placeholder="Gabarito (C/E ou A–E)" maxlength="1">
+          <textarea id="qEnun" class="full" style="min-height:60px" placeholder="Enunciado da questão / assertiva"></textarea>
+          <textarea id="qAlts" class="full" style="min-height:70px;display:none" placeholder="Alternativas, uma por linha:&#10;A) ...&#10;B) ...&#10;C) ..."></textarea>
+          <input id="qCom" class="full" placeholder="Comentário / fundamento (opcional)">
+          <div class="full row" style="justify-content:flex-end"><button type="button" class="btn s" id="qLimpar">Limpar</button><button type="button" class="btn s p" id="qSalvar">＋ Adicionar questão</button></div>
+        </div></div></div>
     <label class="full">Pegadinhas da banca – versões falsas (uma por linha)<textarea id="eFalsas" style="min-height:70px" placeholder="Ex.: As anotações na CTPS geram presunção absoluta de veracidade."></textarea></label>
   </div>
   <datalist id="dlAulas"></datalist>
@@ -684,7 +770,7 @@ const EXEMPLOS=[
 ];
 const srsNovo=()=>({ease:2.5,int:0,reps:0,due:null,lapses:0,hist:[],ok:0,err:0,last:null});
 function novoCartao(o){return{id:uid(),tipo:o.tipo||"Súmula",numero:String(o.numero??"").trim(),assunto:o.assunto||"",tese:o.tese||"",
-  tema:o.tema||SEM,disciplina:o.disciplina||"",aula:o.aula||"",fonte:o.fonte||"",obs:o.obs||"",cobrada:o.cobrada===true,falsas:o.falsas||"",pares:Array.isArray(o.pares)?o.pares:[],temasRel:Array.isArray(o.temasRel)?o.temasRel:[],srs:srsNovo()}}
+  tema:o.tema||SEM,disciplina:o.disciplina||"",aula:o.aula||"",fonte:o.fonte||"",obs:o.obs||"",cobrada:o.cobrada===true,falsas:o.falsas||"",pares:Array.isArray(o.pares)?o.pares:[],outras:Array.isArray(o.outras)?o.outras:[],tags:Array.isArray(o.tags)?o.tags:[],questoes:Array.isArray(o.questoes)?o.questoes:[],essencial:o.essencial===true,temasRel:Array.isArray(o.temasRel)?o.temasRel:[],srs:srsNovo()}}
 let db;
 function addTax(d,m){if(!d)return;db.tax[d]=db.tax[d]||[];if(m&&m!==SEM&&!db.tax[d].includes(m))db.tax[d].push(m)}
 function carregar(){
@@ -704,13 +790,17 @@ function carregarNormalizar(){
   db.peg=db.peg||{};db.game=db.game||{xp:0,dias:{},melhorCombo:0};
   if(!db.lidas){db.lidas={};db.cards.forEach(c=>(c.srs&&c.srs.hist||[]).forEach(h=>{const a=db.lidas[h.d]=db.lidas[h.d]||[];if(!a.includes(c.id))a.push(c.id)}))}
   db.cards.forEach(c=>{
-    c.aula=c.aula||"";c.tema=c.tema||SEM;c.disciplina=c.disciplina||"";c.cobrada=c.cobrada===true;c.pares=Array.isArray(c.pares)?c.pares:[];c.temasRel=Array.isArray(c.temasRel)?c.temasRel:[];
+    c.aula=c.aula||"";c.tema=c.tema||SEM;c.disciplina=c.disciplina||"";c.cobrada=c.cobrada===true;c.essencial=c.essencial===true&&!!c.aula;c.tags=Array.isArray(c.tags)?[...new Set(c.tags.map(limparTag).filter(Boolean))]:[];c.questoes=Array.isArray(c.questoes)?c.questoes.filter(q=>q&&q.enun):[];c.pares=Array.isArray(c.pares)?c.pares:[];c.outras=(Array.isArray(c.outras)?c.outras:[]).filter(o=>o&&o.disciplina&&o.disciplina!==c.disciplina).map(o=>({disciplina:o.disciplina,tema:o.tema||SEM,temasRel:Array.isArray(o.temasRel)?o.temasRel:[]}));c.temasRel=Array.isArray(c.temasRel)?c.temasRel:[];
     const s=c.srs=Object.assign(srsNovo(),c.srs||{});
     if(c.srs.ok===0&&c.srs.err===0&&s.hist.length){s.ok=s.hist.filter(h=>h.r>=1).length;s.err=s.hist.filter(h=>h.r===0).length}
     if(!s.last&&s.hist.length)s.last=s.hist[s.hist.length-1].d;
     addTax(c.disciplina,c.tema);c.temasRel.forEach(m=>addTax(c.disciplina,m));
+    c.outras.forEach(o=>{addTax(o.disciplina,o.tema);o.temasRel.forEach(m=>addTax(o.disciplina,m))});
   });
   if(!Object.keys(db.tax).length)db.tax["Direito do Trabalho"]=[];
+  if(!Array.isArray(db.aulas))db.aulas=[];
+  db.cards.forEach(c=>{if(c.aula&&!db.aulas.includes(c.aula))db.aulas.push(c.aula)});db.aulas.sort(cmp);
+  db.diario=db.diario||{};const lim=addDias(-365);Object.keys(db.diario).forEach(d=>{if(d<lim)delete db.diario[d]});
 }
 function salvar(){try{if(typeof hashesProntos!=="undefined"&&hashesProntos&&!aplicandoNuvem&&carimbar()&&gh){sync.sujo=true;salvarSync();setNuvem(navigator.onLine?"pend":"offline","Alterações pendentes");agendarSync()}localStorage.setItem(KEY,JSON.stringify(db));return true}catch(e){toast("Não foi possível salvar no navegador");return false}}
 
@@ -729,11 +819,12 @@ function prever(c,r){
   if(r===3)int=s.reps===0?4:Math.round(Math.max(int,1)*s.ease*1.3);
   return int;
 }
-function avaliar(c,r){
+function avaliar(c,r,det){
   const s=c.srs,d=iso(hoje());
   if(r===0){s.reps=0;s.int=0;s.lapses++;s.err++;s.ease=Math.max(1.3,s.ease-.2);s.due=d}
   else{s.int=prever(c,r);s.reps++;s.ok++;if(r===1)s.ease=Math.max(1.3,s.ease-.15);if(r===3)s.ease+=.15;s.due=addDias(s.int)}
-  s.hist.push({d,r,t:Date.now()});if(s.hist.length>120)s.hist.shift();s.last=d;
+  const t=Date.now();s.hist.push({d,r,t});if(s.hist.length>120)s.hist.shift();s.last=d;
+  (db.diario[d]=db.diario[d]||[]).push(Object.assign({t,id:c.id,r,modo:"fc"},jogo?{jogo:1}:{},det||{}));
   db.log[d]=(db.log[d]||0)+1;
   const l=db.lidas[d]=db.lidas[d]||[];if(!l.includes(c.id))l.push(c.id);
   salvar();
@@ -742,9 +833,28 @@ const txtInt=n=>n===0?"agora":n===1?"1 dia":n+" dias";
 
 /* ================= LISTAS / FILTROS ================= */
 const discs=()=>Object.keys(db.tax).sort(cmp);
+const limparTag=t=>String(t||"").trim().replace(/^#+/,"").replace(/\s+/g,"-").slice(0,40);
+const todasTags=()=>[...new Set(db.cards.flatMap(c=>c.tags||[]))].sort(cmp);
+const tagsOk=(c,sel)=>!sel.size||[...sel].every(t=>(c.tags||[]).includes(t));
+let jTagSel=new Set(),fTagSel=new Set();
+function renderTagBar(el,sel,cb){
+  const ts=todasTags();[...sel].forEach(t=>{if(!ts.includes(t))sel.delete(t)});
+  $(el).innerHTML=ts.length?`<span class="lbl2">Etiquetas${sel.size>1?" (todas)":""}:</span>`+ts.map(t=>`<span class="htag${sel.has(t)?" on":""}" data-tg="${esc(t)}">#${esc(t)} <span class="small" style="color:inherit;opacity:.75">${db.cards.filter(c=>(c.tags||[]).includes(t)).length}</span></span>`).join("")+(sel.size?' <button class="btn s" data-tgx>limpar</button>':""):"";
+  $(el).onclick=e=>{const x=e.target.closest("[data-tg]");if(x){const t=x.dataset.tg;sel.has(t)?sel.delete(t):sel.add(t);renderTagBar(el,sel,cb);cb&&cb();return}if(e.target.closest("[data-tgx]")){sel.clear();renderTagBar(el,sel,cb);cb&&cb()}};
+}
+const discsDe=c=>[c.disciplina,...(c.outras||[]).map(o=>o.disciplina)].filter(Boolean);
+const temasDe=(c,d)=>[...((!d||c.disciplina===d)?[c.tema,...(c.temasRel||[])]:[]),...(c.outras||[]).filter(o=>!d||o.disciplina===d).flatMap(o=>[o.tema,...(o.temasRel||[])])].filter(x=>x&&x!==SEM);
+const discOk=(c,d)=>!d||discsDe(c).includes(d);
+const aulasLista=()=>[...new Set([...(db.aulas||[]),...uniq("aula")])].sort(cmp);
+function tagsDisc(c){
+  const t=[...(c.essencial&&c.aula?[`<span class="tag" style="color:#e0457b">♥ Essencial – ${esc(c.aula)}</span>`]:[]),`<span class="tag">${esc(c.disciplina||"Sem disciplina")}</span><span class="tag">★ ${esc(c.tema)}</span>`,...(c.temasRel||[]).map(m=>`<span class="tag rel">${esc(m)}</span>`)];
+  (c.outras||[]).forEach(o=>{t.push(`<span class="tag" style="opacity:.85">${esc(o.disciplina)}</span><span class="tag rel">★ ${esc(o.tema)}</span>`);(o.temasRel||[]).forEach(m=>t.push(`<span class="tag rel">${esc(m)}</span>`))});
+  (c.tags||[]).forEach(x=>t.push(`<span class="tag" style="border:1px dashed var(--pri);background:transparent">#${esc(x)}</span>`));
+  return t.join("");
+}
 function materias(d){
   const set=new Set(d?(db.tax[d]||[]):Object.values(db.tax).flat());
-  db.cards.forEach(c=>{if(!d||c.disciplina===d)set.add(c.tema)});
+  db.cards.forEach(c=>{if(!d||c.disciplina===d)set.add(c.tema);(c.outras||[]).forEach(o=>{if(!d||o.disciplina===d)set.add(o.tema)})});
   set.delete(SEM);return[...set].sort(cmp).concat([SEM]);
 }
 const uniq=k=>[...new Set(db.cards.map(c=>c[k]).filter(Boolean))].sort(cmp);
@@ -757,12 +867,13 @@ function preencherFiltros(){
   [["#fDisc","#fTema"],["#jDisc","#jTema"]].forEach(([d,t])=>{fillSel(d,discs());fillSel(t,materias($(d).value))});
   fillSel("#mDisc",discs());
   fillSel("#fTipo",uniq("tipo"),"Todos");fillSel("#jTipo",uniq("tipo"),"Todos");
-  fillSel("#fAula",uniq("aula"));fillSel("#jAula",uniq("aula"));
+  fillSel("#fAula",aulasLista());fillSel("#jAula",aulasLista());
+  fillSel("#pAula",aulasLista(),"— sem aula —");fillSel("#dDisc",discs());
   fillSel("#pDisc",discs(),null);fillSel("#pTema",materias($("#pDisc").value),null);if(!$("#pTema").value)$("#pTema").value=SEM;
-  $("#dlAulas").innerHTML=uniq("aula").map(x=>`<option value="${esc(x)}">`).join("");
+
   fillSel("#cDisc",discs());$("#cDisc").value=$("#jDisc").value;
   fillSel("#cTema",materias($("#jDisc").value));$("#cTema").value=$("#jTema").value;
-  fillSel("#cAula",uniq("aula"));$("#cAula").value=$("#jAula").value;
+  fillSel("#cAula",aulasLista());$("#cAula").value=$("#jAula").value;
   sideInfo();
 }
 $("#fDisc").onchange=()=>fillSel("#fTema",materias($("#fDisc").value));
@@ -843,12 +954,13 @@ function renderMeta(){
     <div><h3 style="margin:0 0 6px">🎯 Meta diária de leitura</h3><span class="small">Regra: ler <b>${m}</b> jurisprudências diferentes por dia · ${ok?"Meta cumprida hoje! 🎉":`faltam <b>${m-f}</b>`} · sequência de metas cumpridas: <b>${seqMeta()}</b> dia(s)${db.cfg.lembrete?` · lembrete às ${db.cfg.lembrete}`:" · sem lembrete (defina em Configurações › Meta e lembrete)"}</span></div>
     <div style="text-align:right"><b style="font-size:30px;color:${ok?"var(--ok)":"var(--pri)"}">${f}</b><span class="small"> / ${m}</span></div></div>
     <div class="mbar${ok?" ok":""}"><i style="width:${pct}%"></i></div>
+    ${relPendente()?`<div class="alerta" id="relAviso" style="cursor:pointer">📊 Seu <b>relatório semanal</b> está pronto – clique para ver os motivos de erro e as jurisprudências que mais caíram.</div>`:""}
     ${atrasado?`<div class="alerta">⏰ Já passou do horário do lembrete (${db.cfg.lembrete}) e a meta de hoje ainda não foi cumprida.</div>`:""}`;
 }
 let metaAntes=null;
 function metaComemorar(){const f=lidasEm(iso(hoje()));if(f===db.cfg.meta&&metaAntes!==f)setTimeout(()=>toast(`🎯 Meta cumprida: ${f} jurisprudências lidas hoje!`),250);metaAntes=f}
 function kpisEstudo(){
-  renderMeta();renderGame();renderProva();
+  renderMeta();if($("#relAviso"))$("#relAviso").onclick=abrirRelatorio;renderGame();renderProva();
   const t=iso(hoje()),c=db.cards;
   const venc=c.filter(x=>x.srs.due&&x.srs.due<=t).length,novos=c.filter(x=>!x.srs.last).length,dom=c.filter(x=>x.srs.int>=21).length;
   $("#kpiStudy").innerHTML=[["Jurisprudências",c.length],["Lidas hoje",lidasEm(t)],["Revisar hoje",venc],["Novas",novos],["Dominadas",dom],["Revisões hoje",db.log[t]||0]].map(([a,b])=>`<div class="kpi"><b>${b}</b><span>${a}</span></div>`).join("");
@@ -856,7 +968,9 @@ function kpisEstudo(){
 function iniciar(){
   jogo=false;
   const d=$("#fDisc").value,te=$("#fTema").value,ti=$("#fTipo").value,au=$("#fAula").value,m=$("#fModo").value,lim=Math.max(1,+$("#fLim").value||20),t=iso(hoje());
-  let arr=db.cards.filter(c=>(!d||c.disciplina===d)&&temaOk(c,te)&&(!ti||c.tipo===ti)&&(!au||c.aula===au));
+  let arr=db.cards.filter(c=>discOk(c,d)&&temaOk(c,te)&&(!ti||c.tipo===ti)&&(!au||c.aula===au)&&tagsOk(c,fTagSel));
+  if(m==="ess")arr=arr.filter(c=>c.essencial);
+  if($("#fEst").value==="qst"){arr=arr.filter(c=>(c.questoes||[]).length);if(!arr.length){$("#area").innerHTML='<div class="box empty">Nenhuma questão de prova cadastrada para esse filtro.<br><span class="small">Cadastre questões na edição da jurisprudência (seção “Questões de prova”).</span></div>';return}}
   if(m==="due")arr=arr.filter(c=>!c.srs.last||(c.srs.due&&c.srs.due<=t));
   if(m==="new")arr=arr.filter(c=>!c.srs.last);
   if(m==="erro")arr=arr.filter(c=>c.srs.err>0);
@@ -884,10 +998,11 @@ function proximo(){
   }
   const modo=jogo?(desafioHoje().modos[atual.id]||"fc"):$("#fEst").value;
   if(modo==="ce"){renderCE(atual);return}
+  if(modo==="qst"&&(atual.questoes||[]).length){renderQst(atual);return}
   if(modo==="lac"){renderLac(atual);return}
   if(modo==="par"&&parceiros(atual).length){renderPar(atual);return}
   const c=atual,inv=$("#fDir").value==="tese";
-  const tags=`<div>${c.cobrada?'<span class="tag" style="color:var(--warn)">★ Mais cobrada</span>':""}<span class="tag">${esc(c.disciplina||"Sem disciplina")}</span><span class="tag">${esc(c.tema)}</span>${(c.temasRel||[]).map(m=>`<span class="tag rel">${esc(m)}</span>`).join("")}</div>`;
+  const tags=`<div>${c.cobrada?'<span class="tag" style="color:var(--warn)">★ Mais cobrada</span>':""}${tagsDisc(c)}</div>`;
   const ident=`<div class="num">${esc(c.tipo)} ${esc(c.numero)}</div><div class="ass">${esc(c.assunto)}</div>`;
   const tese=`<div class="tese" style="margin-top:14px">${c.tese?(db.cfg.destacar?destacar(c.tese):esc(c.tese)):"<i>Tese ainda não cadastrada.</i>"}</div>`;
   const extra=(c.aula?`<p style="margin:16px 0 0"><span class="tag">📚 ${esc(c.aula)}</span></p>`:"")+(c.obs?`<p class="small" style="margin-top:10px">⚠️ ${esc(c.obs)}</p>`:"")+(c.fonte?`<p class="small">Fonte: ${esc(c.fonte)}</p>`:"");
@@ -907,7 +1022,7 @@ function proximo(){
 function virar(){const f=$("#fc");if(!f)return;f.classList.toggle("flip");$("#rate").style.visibility="visible"}
 function responder(r){
   if(!atual||!$("#rate")||$("#rate").style.visibility!=="visible")return;
-  avaliar(atual,r);feitos++;if(r>=1)acertos++;
+  avaliar(atual,r,{modo:"fc",dir:$("#fDir").value});feitos++;if(r>=1)acertos++;
   pontuarJogo(atual,r>=1);
   kpisEstudo();sideInfo();
   metaComemorar();
@@ -916,6 +1031,10 @@ function responder(r){
 }
 document.addEventListener("keydown",e=>{
   if(!$("#estudar").classList.contains("on")||["INPUT","TEXTAREA","SELECT"].includes(e.target.tagName)||$("#dlg").open)return;
+  if($("#qstBox")){const k=e.key.toLowerCase();
+    if(!qstAtual.resp){if(qstAtual.q.tipo==="ce"&&(k==="c"||k==="e"))responderQst(k.toUpperCase());else if(qstAtual.q.tipo==="me"&&/^[a-e]$/.test(k)&&qstAtual.alts.some(a=>a.l===k.toUpperCase()))responderQst(k.toUpperCase())}
+    else if(e.key==="Enter"||e.code==="Space"){e.preventDefault();proximo()}
+    return}
   if($("#parBox")){if(!parAtual.resp&&(e.key==="1"||e.key==="2")){const b=$$("#parBtns button")[+e.key-1];b&&b.click()}return}
   if($("#lacBox"))return;
   if($("#ceBox")){const k=e.key.toLowerCase();
@@ -1000,13 +1119,13 @@ function gerarAssertiva(c){
 let ceAtual={};
 function renderCE(c){
   const q=gerarAssertiva(c);
-  if(!q){avaliar(c,2);feitos++;acertos++;proximo();return}
+  if(!q){avaliar(c,2,{modo:"ce",auto:1});feitos++;acertos++;proximo();return}
   ceAtual={c,q,resp:false};
   const pct=totalSessao?Math.round((totalSessao-fila.length-1)/totalSessao*100):0;
   $("#area").innerHTML=`${hudJogo()}<div class="prog"><i style="width:${pct}%"></i></div>
    <div class="meta"><span>Restam ${fila.length+1}</span><span>Acerto na sessão: ${feitos?Math.round(acertos/feitos*100):0}%</span></div>
    <div class="ce" id="ceBox"><div class="face">
-     <div>${c.cobrada?'<span class="tag" style="color:var(--warn)">★ Mais cobrada</span>':""}<span class="tag">${esc(c.disciplina||"Sem disciplina")}</span><span class="tag">${esc(c.tema)}</span><span class="tag">⚠ Certo ou Errado</span></div>
+     <div>${c.cobrada?'<span class="tag" style="color:var(--warn)">★ Mais cobrada</span>':""}${tagsDisc(c)}<span class="tag">⚠ Certo ou Errado</span></div>
      <div class="small" style="margin-top:12px">Julgue a assertiva de acordo com a <b>${esc(c.tipo)} ${esc(c.numero)}</b> do TST – ${esc(c.assunto)}:</div>
      <div class="stmt">${esc(q.texto)}</div>
      <div class="btns" id="ceBtns"><button style="background:var(--ok)" id="bC">✔ CERTO <small>(C)</small></button><button style="background:var(--bad)" id="bE">✘ ERRADO <small>(E)</small></button></div>
@@ -1016,7 +1135,7 @@ function renderCE(c){
 function responderCE(v){
   if(!ceAtual.c||ceAtual.resp)return;ceAtual.resp=true;
   const {c,q}=ceAtual,ok=v===q.certo,tp=TIPOS_PEG[q.tipo];
-  avaliar(c,ok?2:0);feitos++;if(ok)acertos++;else if(!jogo)fila.push(c);
+  avaliar(c,ok?2:0,{modo:"ce",peg:q.tipo,certo:q.certo,resp:v,txt:(q.texto||"").slice(0,400),orig:q.e&&!q.e.inteiro?q.e.orig:"",novo:q.e&&!q.e.inteiro?q.e.novo:"",origem:q.e&&q.e.origem||""});feitos++;if(ok)acertos++;else if(!jogo)fila.push(c);
   pontuarJogo(c,ok);
   const st=db.peg[q.tipo]=db.peg[q.tipo]||{ok:0,err:0};ok?st.ok++:st.err++;salvar();
   let det="";
@@ -1061,7 +1180,7 @@ function renderLac(c){
   $("#area").innerHTML=`${hudJogo()}<div class="prog"><i style="width:${pct}%"></i></div>
    <div class="meta"><span>Restam ${fila.length+1}</span><span>Acerto na sessão: ${feitos?Math.round(acertos/feitos*100):0}%</span></div>
    <div class="ce" id="lacBox"><div class="face">
-     <div>${c.cobrada?'<span class="tag" style="color:var(--warn)">★ Mais cobrada</span>':""}<span class="tag">${esc(c.disciplina||"Sem disciplina")}</span><span class="tag">${esc(c.tema)}</span><span class="tag">✎ Lacunas</span></div>
+     <div>${c.cobrada?'<span class="tag" style="color:var(--warn)">★ Mais cobrada</span>':""}${tagsDisc(c)}<span class="tag">✎ Lacunas</span></div>
      <div class="small" style="margin-top:12px">Complete a <b>${esc(c.tipo)} ${esc(c.numero)}</b> – ${esc(c.assunto)} (${g.lac.length} lacuna${g.lac.length>1?"s":""}):</div>
      <div class="stmt lac">${html}</div>
      <div class="btns" id="lacBtns"><button style="background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--btntx)" id="lacOk">Conferir <small>(Enter)</small></button><button style="background:var(--mut)" id="lacDica">💡 Dica</button><button style="background:var(--bad)" id="lacNs">Não sei</button></div>
@@ -1074,10 +1193,11 @@ function renderLac(c){
 function conferirLac(desistiu){
   if(!lacAtual.c||lacAtual.resp)return;lacAtual.resp=true;
   const {c,g}=lacAtual,ins=$$("#lacBox input");let ok=0;
-  ins.forEach((inp,k)=>{const certo=!desistiu&&igual(inp.value,g.lac[k].w);if(certo)ok++;inp.classList.add(certo?"ok":"er");inp.disabled=true;
+  const falhas=[];
+  ins.forEach((inp,k)=>{const certo=!desistiu&&igual(inp.value,g.lac[k].w);if(certo)ok++;else falhas.push({w:g.lac[k].w,dig:inp.value.trim()});inp.classList.add(certo?"ok":"er");inp.disabled=true;
     if(!certo)inp.insertAdjacentHTML("afterend",`<span class="gab">${esc(g.lac[k].w)}</span>`)});
   const tot=g.lac.length,r=ok===tot?(lacAtual.dica?1:2):ok*2>=tot?1:0;
-  avaliar(c,r);feitos++;if(r>=1)acertos++;else if(!jogo)fila.push(c);
+  avaliar(c,r,{modo:"lac",ok,tot,dica:lacAtual.dica?1:0,desistiu:desistiu?1:0,falhas});feitos++;if(r>=1)acertos++;else if(!jogo)fila.push(c);
   pontuarJogo(c,r>=1);
   db.cfg.lacStats.ok+=ok;db.cfg.lacStats.tot+=tot;salvar();
   $("#lacBtns").style.display="none";
@@ -1132,7 +1252,7 @@ function responderPar(id){
   if(!parAtual.c||parAtual.resp)return;parAtual.resp=true;
   const {c,alvo,outro}=parAtual,ok=id===alvo.id;
   $$("#parBtns button").forEach(b=>{b.disabled=true;if(b.dataset.id===alvo.id)b.classList.add("ok");else if(b.dataset.id===id)b.classList.add("er")});
-  avaliar(alvo,ok?2:0);if(!ok)avaliar(outro,1);feitos++;if(ok)acertos++;else if(!jogo)fila.push(c);
+  avaliar(alvo,ok?2:0,{modo:"par",outro:outro.id,acertou:ok?1:0});if(!ok)avaliar(outro,1,{modo:"par",papel:"confundida",outro:alvo.id});feitos++;if(ok)acertos++;else if(!jogo)fila.push(c);
   pontuarJogo(c,ok);
   $("#parRes").innerHTML=`<div class="res"><h4 style="color:${ok?"var(--ok)":"var(--bad)"}">${ok?"✅ Correto":"❌ Trocou os enunciados"} – o trecho é da ${esc(alvo.tipo)} ${esc(alvo.numero)}</h4>${comparaHTML(alvo,outro)}
     <div style="text-align:right;margin-top:10px"><button class="btn p" id="parProx">Próxima ▶ <small>(Enter)</small></button></div></div>`;
@@ -1223,27 +1343,31 @@ const SORTS={num:porNumero,alfa:(a,b)=>cmp(a.assunto,b.assunto)||porNumero(a,b),
   sit:(a,b)=>(ORD_SIT.indexOf(situacao(a)[0])-ORD_SIT.indexOf(situacao(b)[0]))||porNumero(a,b),
   erros:(a,b)=>(b.srs.err-a.srs.err)||(b.srs.ok-a.srs.ok)||porNumero(a,b),
   prox:(a,b)=>(a.srs.due||"9999").localeCompare(b.srs.due||"9999")||porNumero(a,b),
-  cob:(a,b)=>(b.cobrada-a.cobrada)||porNumero(a,b)};
+  cob:(a,b)=>(b.cobrada-a.cobrada)||porNumero(a,b),
+  ess:(a,b)=>(b.essencial-a.essencial)||cmp(a.aula,b.aula)||porNumero(a,b),
+  qst:(a,b)=>((b.questoes||[]).length-(a.questoes||[]).length)||porNumero(a,b)};
 let dirAsc=true,listaAtual=[];
 function atualizarDir(){$("#jDir").textContent=dirAsc?"↑ Crescente":"↓ Decrescente"}
 function renderLista(){
+  const es=$("#jEss").value,qs=$("#jQst").value;renderTagBar("#jTags",jTagSel,renderLista);
   const q=norm($("#busca").value),d=$("#jDisc").value,te=$("#jTema").value,ti=$("#jTipo").value,au=$("#jAula").value,si=$("#jSit").value,cb=$("#jCob").value,o=$("#jOrd").value;
   const cn=norm($("#cNum").value),ca=norm($("#cAss").value),ae=$("#cAE").value,px=$("#cProx").value,t=iso(hoje());
-  let arr=db.cards.filter(c=>(!d||c.disciplina===d)&&temaOk(c,te)&&(!ti||c.tipo===ti)&&(!au||c.aula===au)
+  let arr=db.cards.filter(c=>discOk(c,d)&&temaOk(c,te)&&(!ti||c.tipo===ti)&&(!au||c.aula===au)
     &&(!si||(si==="erro"?c.srs.err>0:situacao(c)[0]===si))
     &&(!cb||(cb==="s"?c.cobrada:!c.cobrada))
+    &&(!es||(es==="s"?c.essencial:!c.essencial))&&(!qs||(qs==="s"?(c.questoes||[]).length:!(c.questoes||[]).length))&&tagsOk(c,jTagSel)
     &&(!cn||norm(c.numero)===cn||norm(c.tipo+" "+c.numero).includes(cn))
     &&(!ca||norm(c.assunto).includes(ca))
     &&(!ae||(ae==="erro"?c.srs.err>0:ae==="ok"?(c.srs.ok>0&&c.srs.err===0):(c.srs.ok+c.srs.err===0)))
     &&(!px||(px==="sem"?!c.srs.due:px==="venc"?(c.srs.due&&c.srs.due<=t):(c.srs.due&&c.srs.due>t&&c.srs.due<=addDias(+px))))
-    &&(!q||norm([c.tipo,c.numero,c.assunto,c.tese,c.tema,c.disciplina,c.aula,c.obs].join(" ")).includes(q)));
+    &&(!q||norm([c.tipo,c.numero,c.assunto,c.tese,c.tema,c.disciplina,c.aula,c.obs,...discsDe(c),...temasDe(c),...(c.tags||[]).map(t=>"#"+t)].join(" ")).includes(q)));
   arr.sort(SORTS[o]||porNumero);if(!dirAsc)arr.reverse();listaAtual=arr;
   $$("#tabJ th[data-o]").forEach(th=>{const on=th.dataset.o===o;th.classList.toggle("on",on);th.querySelector(".ar").textContent=on?(dirAsc?"▲":"▼"):"⇅"});
   $("#jCont").textContent=`${arr.length} de ${db.cards.length} jurisprudências · ${arr.filter(c=>c.cobrada).length} ★`;
   $("#lista").innerHTML=arr.map(c=>{const[s,cor]=situacao(c);return`<tr data-id="${c.id}" style="cursor:pointer">
-    <td style="white-space:nowrap"><span class="star${c.cobrada?"":" off"}" data-star title="${c.cobrada?"Desmarcar":"Marcar"} como mais cobrada">${c.cobrada?"★":"☆"}</span><b>${esc(c.tipo)} ${esc(c.numero)}</b></td>
-    <td>${esc(c.assunto)}${c.tese?"":' <span class="small">(sem tese)</span>'}</td>
-    <td>${esc(c.disciplina||"—")}</td><td>${esc(c.tema)}${(c.temasRel||[]).length?`<br><span class="small">+ ${c.temasRel.map(esc).join(", ")}</span>`:""}</td><td>${esc(c.aula||"—")}</td>
+    <td style="white-space:nowrap"><span class="star${c.cobrada?"":" off"}" data-star title="${c.cobrada?"Desmarcar":"Marcar"} como mais cobrada">${c.cobrada?"★":"☆"}</span>${c.aula?`<span class="heart${c.essencial?"":" off"}" data-heart title="${c.essencial?"Desmarcar":"Marcar"} como essencial para ${esc(c.aula)}">${c.essencial?"♥":"♡"}</span>`:""}<b>${esc(c.tipo)} ${esc(c.numero)}</b>${(c.questoes||[]).length?`<br><span class="small">📝 ${c.questoes.length} questão(ões)</span>`:""}</td>
+    <td>${esc(c.assunto)}${c.tese?"":' <span class="small">(sem tese)</span>'}${(c.tags||[]).length?`<br>${c.tags.map(t=>`<span class="small" style="color:var(--pri)">#${esc(t)}</span>`).join(" ")}`:""}</td>
+    <td>${esc(c.disciplina||"—")}${(c.outras||[]).length?`<br><span class="small">+ ${c.outras.map(o=>esc(o.disciplina)).join(", ")}</span>`:""}</td><td>${esc(c.tema)}${temasDe(c).filter(m=>m!==c.tema).length?`<br><span class="small">+ ${temasDe(c).filter(m=>m!==c.tema).map(esc).join(", ")}</span>`:""}</td><td>${esc(c.aula||"—")}</td>
     <td style="white-space:nowrap"><span class="dot" style="color:${cor};background:${cor}"></span>${s}</td>
     <td style="white-space:nowrap"><span style="color:var(--ok)">${c.srs.ok}</span> / <span style="color:var(--bad)">${c.srs.err}</span></td>
     <td style="white-space:nowrap">${fmt(c.srs.due)}</td><td><button class="btn s">Editar</button></td></tr>`}).join("")||`<tr><td colspan="9" class="empty">Nenhuma jurisprudência encontrada.</td></tr>`;
@@ -1251,6 +1375,7 @@ function renderLista(){
 $("#lista").onclick=e=>{
   const st=e.target.closest("[data-star]"),tr=e.target.closest("tr[data-id]");if(!tr)return;
   if(st){const c=db.cards.find(x=>x.id===tr.dataset.id);c.cobrada=!c.cobrada;salvar();renderLista();return}
+  if(e.target.closest("[data-heart]")){const c=db.cards.find(x=>x.id===tr.dataset.id);c.essencial=!c.essencial;salvar();renderLista();toast(c.essencial?`♥ Essencial para ${c.aula}`:"Desmarcada");return}
   editar(tr.dataset.id);
 };
 $$("#tabJ th[data-o]").forEach(th=>th.onclick=()=>{
@@ -1263,8 +1388,8 @@ function setDisc(v){$("#jDisc").value=v;$("#cDisc").value=v;fillSel("#jTema",mat
 $("#jDisc").onchange=()=>setDisc($("#jDisc").value);$("#cDisc").onchange=()=>setDisc($("#cDisc").value);
 [["#jTema","#cTema"],["#jAula","#cAula"],["#jSit","#cSit"]].forEach(([x,y])=>{$(x).onchange=()=>{$(y).value=$(x).value;renderLista()};$(y).onchange=()=>{$(x).value=$(y).value;renderLista()}});
 ["#busca","#cNum","#cAss"].forEach(x=>$(x).oninput=renderLista);
-["#jTipo","#jCob","#cAE","#cProx"].forEach(x=>$(x).onchange=renderLista);
-function limparFiltros(){["#busca","#jDisc","#jTema","#jTipo","#jAula","#jSit","#jCob","#cNum","#cAss","#cDisc","#cTema","#cAula","#cSit","#cAE","#cProx"].forEach(x=>$(x).value="");setDisc("")}
+["#jTipo","#jCob","#jEss","#jQst","#cAE","#cProx"].forEach(x=>$(x).onchange=renderLista);
+function limparFiltros(){jTagSel.clear();["#busca","#jDisc","#jTema","#jTipo","#jAula","#jSit","#jCob","#jEss","#jQst","#cNum","#cAss","#cDisc","#cTema","#cAula","#cSit","#cAE","#cProx"].forEach(x=>$(x).value="");setDisc("")}
 $("#jLimpar").onclick=limparFiltros;$("#cLimpar").onclick=limparFiltros;
 function marcarExibidas(v){
   if(!listaAtual.length)return;
@@ -1273,7 +1398,7 @@ function marcarExibidas(v){
 }
 $("#jMarcar").onclick=()=>marcarExibidas(true);$("#jDesmarcar").onclick=()=>marcarExibidas(false);
 
-const temaOk=(c,te)=>!te||c.tema===te||(c.temasRel||[]).includes(te);
+const temaOk=(c,te)=>!te||c.tema===te||temasDe(c).includes(te);
 /* --- edição --- */
 let editId=null;
 let eRelSel=[],eParSel=[];
@@ -1281,58 +1406,250 @@ function renderEPares(){$("#ePares").innerHTML=eParSel.map(cardPor).filter(Boole
 $("#ePares").onclick=e=>{const b=e.target.closest("[data-rm]");if(b){eParSel=eParSel.filter(x=>x!==b.dataset.rm);renderEPares()}};
 $("#eParAdd").onclick=()=>{const x=acharCard($("#eParNovo").value);if(!x){toast("Jurisprudência não encontrada");return}if(x.id===editId){toast("Escolha outra jurisprudência");return}if(!eParSel.includes(x.id))eParSel.push(x.id);$("#eParNovo").value="";renderEPares()};
 $("#eParNovo").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();$("#eParAdd").click()}};
-function fillEditTema(d,v){fillSel("#eTema",materias(d),null,false);$("#eTema").value=[...$("#eTema").options].some(o=>o.value===v)?v:SEM;renderRel()}
-function renderRel(){
-  const d=$("#eDisc").value,pri=$("#eTema").value,ms=materias(d).filter(m=>m!==SEM);
-  eRelSel=eRelSel.filter(m=>m!==pri);
-  ms.forEach(m=>{if(eRelSel.includes(m))return});
-  const todas=[...new Set([...ms,...eRelSel])].sort(cmp);
-  $("#eRel").innerHTML=todas.length?todas.map(m=>`<span class="chip sel${eRelSel.includes(m)?" on":""}${m===pri?" pri":""}" data-m="${esc(m)}" title="${m===pri?"Matéria principal":"Marcar/desmarcar"}">${eRelSel.includes(m)?"✓ ":""}${esc(m)}</span>`).join(""):`<span class="small">${d?"Nenhuma matéria cadastrada nesta disciplina – inclua abaixo.":"Escolha uma disciplina para relacionar matérias."}</span>`;
-  $("#eRelNova").disabled=!d;$("#eRelAdd").disabled=!d;
+/* blocos de disciplina: [{d,pri,rel}] – o primeiro é a disciplina principal */
+let eBlocos=[],eTags=[],eQst=[],qEdit=-1;
+function renderETags(){$("#eTagsBox").innerHTML=eTags.map((t,i)=>`<span class="htag on">#${esc(t)}<button type="button" data-tr="${i}" title="Remover">✕</button></span>`).join("")||'<span class="small">Nenhuma etiqueta.</span>';$("#dlTags").innerHTML=todasTags().filter(t=>!eTags.includes(t)).map(t=>`<option value="#${esc(t)}">`).join("")}
+function addETag(v){String(v||"").split(/[,;\s]+/).map(limparTag).filter(Boolean).forEach(t=>{const ex=todasTags().find(x=>norm(x)===norm(t))||t;if(!eTags.some(x=>norm(x)===norm(ex)))eTags.push(ex)});$("#eTagNova").value="";renderETags()}
+$("#eTagsBox").onclick=e=>{const b=e.target.closest("[data-tr]");if(b){eTags.splice(+b.dataset.tr,1);renderETags()}};
+$("#eTagAdd").onclick=()=>addETag($("#eTagNova").value);
+$("#eTagNova").onkeydown=e=>{if(e.key==="Enter"||e.key===","){e.preventDefault();addETag($("#eTagNova").value)}};
+function atualizarEss(){const a=$("#eAula").value;$("#eEss").disabled=!a;$("#eEssTxt").innerHTML=a?`♥ Essencial para a aula <b>${esc(a)}</b>`:"♥ Essencial para a aula <span class='small'>(escolha a aula)</span>";if(!a)$("#eEss").checked=false}
+$("#eAula").onchange=atualizarEss;
+const parseAlts=t=>String(t||"").split("\n").map(x=>x.trim()).filter(Boolean).map((x,i)=>{const m=x.match(/^([A-Ea-e])\s*[)\.\-–:]\s*(.*)$/);return{l:m?m[1].toUpperCase():"ABCDE"[i],t:m?m[2]:x}});
+function renderEQst(){
+  $("#eQst").innerHTML=eQst.map((q,i)=>`<div class="q"><span><b>${q.tipo==="ce"?"C/E":"Múltipla escolha"}</b>${q.banca?` · ${esc(q.banca)}`:""} · gabarito <b>${esc(q.gab)}</b>${(q.ok||q.err)?` · ${q.ok||0} acerto(s) / ${q.err||0} erro(s)`:""}<br><span class="small">${esc(q.enun.slice(0,160))}${q.enun.length>160?"…":""}</span></span>
+    <span class="row" style="flex-wrap:nowrap"><button type="button" class="btn s" data-qe="${i}">✎</button><button type="button" class="btn s d" data-qd="${i}">✕</button></span></div>`).join("")||'<span class="small">Nenhuma questão vinculada.</span>';
+  $("#qSalvar").textContent=qEdit>=0?"✔ Atualizar questão":"＋ Adicionar questão";
 }
-$("#eRel").onclick=e=>{const ch=e.target.closest("[data-m]");if(!ch||ch.classList.contains("pri"))return;const m=ch.dataset.m;eRelSel=eRelSel.includes(m)?eRelSel.filter(x=>x!==m):[...eRelSel,m];renderRel()};
-function novaMateria(nome){
-  const d=$("#eDisc").value;nome=(nome||"").trim();
-  if(!d){toast("Escolha primeiro a disciplina");return null}
-  if(!nome||nome===SEM)return null;
-  const ex=materias(d).find(m=>norm(m)===norm(nome));if(ex)return ex;
-  addTax(d,nome);salvar();toast(`Matéria “${nome}” incluída em ${d}`);return nome;
+function limparQForm(){qEdit=-1;["#qBanca","#qGab","#qEnun","#qAlts","#qCom"].forEach(x=>$(x).value="");$("#qTipo").value="ce";$("#qAlts").style.display="none";renderEQst()}
+$("#qTipo").onchange=()=>{$("#qAlts").style.display=$("#qTipo").value==="me"?"":"none"};
+$("#qLimpar").onclick=limparQForm;
+$("#qSalvar").onclick=()=>{
+  const tipo=$("#qTipo").value,enun=$("#qEnun").value.trim(),gab=$("#qGab").value.trim().toUpperCase(),alts=$("#qAlts").value.trim();
+  if(!enun){toast("Informe o enunciado da questão");return}
+  if(tipo==="ce"&&!/^[CE]$/.test(gab)){toast("Gabarito de Certo ou Errado: C ou E");return}
+  if(tipo==="me"){const al=parseAlts(alts);if(al.length<2){toast("Informe ao menos 2 alternativas (uma por linha)");return}if(!al.some(a=>a.l===gab)){toast("O gabarito precisa ser uma das letras das alternativas");return}}
+  const q=Object.assign(qEdit>=0?eQst[qEdit]:{id:uid(),ok:0,err:0},{tipo,enun,gab,alts:tipo==="me"?alts:"",banca:$("#qBanca").value.trim(),com:$("#qCom").value.trim()});
+  if(qEdit<0)eQst.push(q);limparQForm();toast("Questão salva na jurisprudência (clique em Salvar para gravar)");
+};
+$("#eQst").onclick=e=>{const ed=e.target.closest("[data-qe]"),dl=e.target.closest("[data-qd]");
+  if(ed){const q=eQst[qEdit=+ed.dataset.qe];$("#qBanca").value=q.banca||"";$("#qTipo").value=q.tipo;$("#qGab").value=q.gab;$("#qEnun").value=q.enun;$("#qAlts").value=q.alts||"";$("#qCom").value=q.com||"";$("#qAlts").style.display=q.tipo==="me"?"":"none";renderEQst();$("#qEnun").focus()}
+  if(dl&&confirm("Remover esta questão?")){eQst.splice(+dl.dataset.qd,1);limparQForm()}};
+function renderBlocos(){
+  $("#eBlocos").innerHTML=eBlocos.map((b,i)=>{
+    const usados=eBlocos.map(x=>x.d).filter((x,j)=>x&&j!==i);
+    const ds=discs().filter(x=>!usados.includes(x));if(b.d&&!ds.includes(b.d))ds.push(b.d);
+    const ms=b.d?[...new Set([...materias(b.d).filter(m=>m!==SEM),...(b.pri?[b.pri]:[]),...b.rel])].sort(cmp):[];
+    const chip=m=>{const pr=m===b.pri,on=b.rel.includes(m);return`<span class="chip sel${pr?" prin":on?" on":""}" data-b="${i}" data-m="${esc(m)}" title="${pr?"Matéria principal – clique para desmarcar":on?"Secundária – clique para desmarcar":b.pri?"Clique para marcar como secundária":"Clique para marcar como principal"}">${pr?"★ ":on?"✓ ":""}${esc(m)}</span>`};
+    return`<div class="relbox blk"><div class="hd"><span class="tag">${i?"Disciplina adicional":"Disciplina principal"}</span>
+      <select data-bd="${i}"><option value="">— escolha a disciplina —</option>${ds.map(x=>`<option value="${esc(x)}"${x===b.d?" selected":""}>${esc(x)}</option>`).join("")}</select>
+      ${i?`<button type="button" class="btn s d" data-brm="${i}" title="Remover disciplina">✕</button>`:""}</div>
+      <div class="chips">${b.d?(ms.map(chip).join("")||'<span class="small">Nenhuma matéria cadastrada – inclua abaixo.</span>'):'<span class="small">Escolha a disciplina para ver as matérias.</span>'}</div>
+      <div class="small" style="margin:-2px 0 8px">${b.d?(b.pri?`Principal: <b>${esc(b.pri)}</b>${b.rel.length?` · secundárias: ${b.rel.map(esc).join(", ")}`:""}`:`<b style="color:var(--warn)">Pendente de classificação</b> – clique na matéria principal`):""}</div>
+      <div class="row" style="flex-wrap:nowrap;gap:6px"><input data-bn="${i}" placeholder="Nova matéria nesta disciplina" style="flex:1"${b.d?"":" disabled"}><button type="button" class="btn s" data-badd="${i}"${b.d?"":" disabled"}>＋ Incluir</button></div></div>`}).join("");
 }
-$("#eRelAdd").onclick=()=>{const m=novaMateria($("#eRelNova").value);if(!m)return;if(!eRelSel.includes(m)&&m!==$("#eTema").value)eRelSel.push(m);$("#eRelNova").value="";fillEditTema($("#eDisc").value,$("#eTema").value)};
-$("#eRelNova").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();$("#eRelAdd").click()}};
-$("#eNovaMat").onclick=()=>{const m=novaMateria(prompt(`Nova matéria em “${$("#eDisc").value||"—"}”:`)||"");if(m)fillEditTema($("#eDisc").value,m)};
-$("#eTema").onchange=renderRel;
+function marcarMateria(b,m){
+  if(m===b.pri)b.pri="";
+  else if(b.rel.includes(m))b.rel=b.rel.filter(x=>x!==m);
+  else if(!b.pri)b.pri=m;
+  else b.rel.push(m);
+}
+$("#eBlocos").onclick=e=>{
+  const ch=e.target.closest("[data-m]");if(ch){marcarMateria(eBlocos[+ch.dataset.b],ch.dataset.m);renderBlocos();return}
+  const rm=e.target.closest("[data-brm]");if(rm){eBlocos.splice(+rm.dataset.brm,1);renderBlocos();return}
+  const ad=e.target.closest("[data-badd]");if(ad){const i=+ad.dataset.badd,inp=document.querySelector(`[data-bn="${i}"]`),bl=eBlocos[i],nome=inp.value.trim();
+    if(!nome||nome===SEM||!bl.d)return;const ex=materias(bl.d).find(m=>norm(m)===norm(nome));const m=ex||nome;
+    if(!ex){addTax(bl.d,m);salvar();toast(`Matéria “${m}” incluída em ${bl.d}`)}
+    if(m!==bl.pri&&!bl.rel.includes(m))marcarMateria(bl,m);inp.value="";renderBlocos();setTimeout(()=>{const n=document.querySelector(`[data-bn="${i}"]`);n&&n.focus()},0)}
+};
+$("#eBlocos").onchange=e=>{const sl=e.target.closest("[data-bd]");if(!sl)return;const b=eBlocos[+sl.dataset.bd];b.d=sl.value;b.pri="";b.rel=[];renderBlocos()};
+$("#eBlocos").onkeydown=e=>{const i=e.target.dataset&&e.target.dataset.bn;if(i!==undefined&&e.key==="Enter"){e.preventDefault();document.querySelector(`[data-badd="${i}"]`).click()}};
+$("#eAddDisc").onclick=()=>{const livres=discs().filter(x=>!eBlocos.some(b=>b.d===x));if(!livres.length){toast("Todas as disciplinas já foram adicionadas – cadastre outras em Configurações");return}eBlocos.push({d:"",pri:"",rel:[]});renderBlocos()};
+function fillEAula(v){const al=aulasLista();if(v&&!al.includes(v))al.push(v);$("#eAula").innerHTML=`<option value="">— sem aula —</option>`+al.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");$("#eAula").value=v||""}
+$("#eNovaAula").onclick=()=>{const v=(prompt("Nome da nova aula:")||"").trim();if(!v)return;const ex=aulasLista().find(a=>norm(a)===norm(v));if(!ex){db.aulas.push(v);db.aulas.sort(cmp);salvar();toast(`Aula “${v}” cadastrada`)}fillEAula(ex||v);atualizarEss()};
 function editar(id){
   editId=id;const c=db.cards.find(x=>x.id===id)||novoCartao({disciplina:discs()[0]||""});
   $("#dlgT").textContent=id?"Editar jurisprudência":"Nova jurisprudência";$("#eDel").style.display=id?"":"none";
   if(![...$("#eTipo").options].some(o=>o.value===c.tipo))$("#eTipo").add(new Option(c.tipo));
-  const ds=discs();if(c.disciplina&&!ds.includes(c.disciplina))ds.push(c.disciplina);
-  $("#eDisc").innerHTML=`<option value="">— sem disciplina —</option>`+ds.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
-  $("#eDisc").value=c.disciplina;eRelSel=[...(c.temasRel||[])];eParSel=[...(c.pares||[])];renderEPares();$("#eParNovo").value="";fillEditTema(c.disciplina,c.tema);$("#eRelNova").value="";
-  $("#eTipo").value=c.tipo;$("#eNum").value=c.numero;$("#eAss").value=c.assunto;$("#eTese").value=c.tese;$("#eFalsas").value=c.falsas||"";$("#eAula").value=c.aula;$("#eCob").checked=!!c.cobrada;$("#eFonte").value=c.fonte;$("#eObs").value=c.obs;
+  eBlocos=[{d:c.disciplina,pri:c.tema&&c.tema!==SEM?c.tema:"",rel:[...(c.temasRel||[])]},...(c.outras||[]).map(o=>({d:o.disciplina,pri:o.tema&&o.tema!==SEM?o.tema:"",rel:[...(o.temasRel||[])]}))];renderBlocos();
+  eParSel=[...(c.pares||[])];renderEPares();$("#eParNovo").value="";eTags=[...(c.tags||[])];renderETags();eQst=JSON.parse(JSON.stringify(c.questoes||[]));limparQForm();
+  $("#eTipo").value=c.tipo;$("#eNum").value=c.numero;$("#eAss").value=c.assunto;$("#eTese").value=c.tese;$("#eFalsas").value=c.falsas||"";fillEAula(c.aula);$("#eEss").checked=!!c.essencial;atualizarEss();$("#eCob").checked=!!c.cobrada;$("#eFonte").value=c.fonte;$("#eObs").value=c.obs;
   $("#eInfo").textContent=id?`Acertos ${c.srs.ok} · Erros ${c.srs.err} · Última revisão ${fmt(c.srs.last)}`:"";
   $("#dlg").showModal();
 }
-$("#eDisc").onchange=()=>{eRelSel=[];fillEditTema($("#eDisc").value,$("#eTema").value)};
 $("#eSalvar").onclick=()=>{
-  const v={falsas:$("#eFalsas").value.trim(),cobrada:$("#eCob").checked,tipo:$("#eTipo").value,numero:$("#eNum").value.trim(),assunto:$("#eAss").value.trim(),tese:$("#eTese").value.trim(),tema:$("#eTema").value||SEM,temasRel:eRelSel.filter(m=>m!==$("#eTema").value),disciplina:$("#eDisc").value,aula:$("#eAula").value.trim(),fonte:$("#eFonte").value.trim(),obs:$("#eObs").value.trim()};
+  if($("#eTagNova").value.trim())addETag($("#eTagNova").value);
+  if($("#qEnun").value.trim()&&confirm("Há uma questão preenchida e não adicionada. Adicionar antes de salvar?")){$("#qSalvar").click();if($("#qEnun").value.trim())return}
+  const v={tags:[...eTags],questoes:eQst,essencial:$("#eEss").checked&&!!$("#eAula").value,falsas:$("#eFalsas").value.trim(),cobrada:$("#eCob").checked,tipo:$("#eTipo").value,numero:$("#eNum").value.trim(),assunto:$("#eAss").value.trim(),tese:$("#eTese").value.trim(),tema:eBlocos[0].pri||SEM,temasRel:eBlocos[0].rel.filter(m=>m!==eBlocos[0].pri),disciplina:eBlocos[0].d,outras:eBlocos.slice(1).filter(b=>b.d&&b.d!==eBlocos[0].d).map(b=>({disciplina:b.d,tema:b.pri||SEM,temasRel:b.rel.filter(m=>m!==b.pri)})),aula:$("#eAula").value,fonte:$("#eFonte").value.trim(),obs:$("#eObs").value.trim()};
   if(!v.numero||!v.assunto){toast("Informe ao menos Número e Assunto");return}
+  if(v.disciplina&&v.tema===SEM&&!confirm("A matéria principal está pendente de classificação. Salvar assim mesmo?"))return;
   const dup=db.cards.find(x=>x.id!==editId&&chave(x)===chave(v));
   if(dup&&!confirm(`Já existe ${dup.tipo} ${dup.numero}. Salvar mesmo assim?`))return;
   if(editId)Object.assign(db.cards.find(x=>x.id===editId),v);else db.cards.push(novoCartao(v));
   {const card=editId?db.cards.find(x=>x.id===editId):db.cards[db.cards.length-1];const ant=new Set(card.pares||[]);
    [...ant].filter(id=>!eParSel.includes(id)).forEach(id=>vincular(card,cardPor(id),false));
    eParSel.forEach(id=>vincular(card,cardPor(id),true));}
-  addTax(v.disciplina,v.tema);v.temasRel.forEach(m=>addTax(v.disciplina,m));salvar();$("#dlg").close();refresh();toast("Jurisprudência salva");
+  addTax(v.disciplina,v.tema);v.temasRel.forEach(m=>addTax(v.disciplina,m));v.outras.forEach(o=>{addTax(o.disciplina,o.tema);o.temasRel.forEach(m=>addTax(o.disciplina,m))});if(v.aula&&!db.aulas.includes(v.aula)){db.aulas.push(v.aula);db.aulas.sort(cmp)}salvar();$("#dlg").close();refresh();toast("Jurisprudência salva");
 };
 $("#eDel").onclick=()=>{if(confirm("Excluir esta jurisprudência?")){db.cards=db.cards.filter(x=>x.id!==editId);db.cards.forEach(x=>x.pares=(x.pares||[]).filter(i=>i!==editId));salvar();$("#dlg").close();refresh()}};
 $("#eCanc").onclick=()=>$("#dlg").close();
 $("#btnNovo").onclick=()=>editar(null);
 
+/* ================= QUESTÕES DE PROVA ================= */
+let qstAtual={};
+function renderQst(c){
+  const qs=c.questoes;const pesos=qs.map(q=>1+(q.err||0)*2/(1+(q.ok||0)));let r=Math.random()*pesos.reduce((a,b)=>a+b,0),i=0;while(i<qs.length-1&&(r-=pesos[i])>0)i++;
+  const q=qs[i],alts=q.tipo==="me"?parseAlts(q.alts):[];qstAtual={c,q,alts,resp:false};
+  const pct=totalSessao?Math.round((totalSessao-fila.length-1)/totalSessao*100):0;
+  $("#area").innerHTML=`${hudJogo()}<div class="prog"><i style="width:${pct}%"></i></div>
+   <div class="meta"><span>Restam ${fila.length+1}</span><span>Acerto na sessão: ${feitos?Math.round(acertos/feitos*100):0}%</span></div>
+   <div class="ce" id="qstBox"><div class="face">
+     <div>${tagsDisc(c)}<span class="tag">📝 Questão de prova</span></div>
+     <div class="small" style="margin-top:12px">${q.banca?`<b>${esc(q.banca)}</b> · `:""}${q.tipo==="ce"?"Julgue o item":"Assinale a alternativa correta"} – relacionada à ${esc(c.tipo)} ${esc(c.numero)}</div>
+     <div class="stmt" style="white-space:pre-wrap">${esc(q.enun)}</div>
+     ${q.tipo==="ce"?`<div class="btns" id="qBtns"><button style="background:var(--ok)" data-ql="C">✔ CERTO <small>(C)</small></button><button style="background:var(--bad)" data-ql="E">✘ ERRADO <small>(E)</small></button></div>`
+       :`<div class="alts" id="qBtns">${alts.map(a=>`<button data-ql="${a.l}"><b>${a.l})</b> ${esc(a.t)}</button>`).join("")}</div>`}
+     <div id="qRes"></div></div></div>`;
+  $$("#qBtns [data-ql]").forEach(b=>b.onclick=()=>responderQst(b.dataset.ql));
+}
+function responderQst(l){
+  if(!qstAtual.c||qstAtual.resp)return;qstAtual.resp=true;
+  const {c,q}=qstAtual,ok=l===q.gab;
+  q.ok=(q.ok||0)+(ok?1:0);q.err=(q.err||0)+(ok?0:1);
+  avaliar(c,ok?2:0,{modo:"qst",qid:q.id,resp:l,gab:q.gab,banca:q.banca||"",qtipo:q.tipo});feitos++;if(ok)acertos++;else if(!jogo)fila.push(c);
+  pontuarJogo(c,ok);
+  $$("#qBtns [data-ql]").forEach(b=>{b.disabled=true;if(b.dataset.ql===q.gab)b.classList.add("ok");else if(b.dataset.ql===l)b.classList.add("er")});
+  if(q.tipo==="ce")$("#qBtns").style.display="none";
+  $("#qRes").innerHTML=`<div class="res"><h4 style="color:${ok?"var(--ok)":"var(--bad)"}">${ok?"✅ Você acertou":"❌ Você errou"} – gabarito: ${q.tipo==="ce"?(q.gab==="C"?"CERTO":"ERRADO"):q.gab}${ok?"":` (você marcou ${l})`}</h4>
+    ${q.com?`<p><b>Comentário:</b> ${esc(q.com)}</p>`:""}
+    <p class="small">${esc(c.tipo)} ${esc(c.numero)} – ${esc(c.assunto)}:</p><div class="var">${(db.cfg.destacar?destacar(c.tese||""):esc(c.tese||"")).replace(/\n/g,"<br>")}</div>
+    <p class="small">Esta questão: ${q.ok} acerto(s) · ${q.err} erro(s)</p>
+    <div style="text-align:right;margin-top:10px"><button class="btn p" id="qProx">Próxima ▶ <small>(Enter)</small></button></div></div>`;
+  $("#qProx").onclick=proximo;
+  kpisEstudo();sideInfo();metaComemorar();
+}
+
+/* ================= RELATÓRIO SEMANAL ================= */
+function semanaKey(d){const x=new Date(d+"T00:00");x.setDate(x.getDate()-x.getDay());return iso(x)}
+function dadosSemana(fim){
+  const dias=[];for(let i=6;i>=0;i--){const x=new Date(fim+"T00:00");x.setDate(x.getDate()-i);dias.push(iso(x))}
+  const ev=dias.flatMap(d=>entradasDia(d)).filter(e=>cardPor(e.id));
+  return{dias,ev};
+}
+function renderRelSemana(){
+  const fim=diaSel,{dias,ev}=dadosSemana(fim);
+  const ini=new Date(fim+"T00:00");ini.setDate(ini.getDate()-7);const ant=dadosSemana(iso(ini));
+  const tx=l=>l.length?Math.round(l.filter(acerto).length/l.length*100):null;
+  const er=ev.filter(e=>!acerto(e)),mot={},jur={};
+  er.forEach(e=>{const k=categoria(e);mot[k]=(mot[k]||0)+1;jur[e.id]=(jur[e.id]||0)+1});
+  const topM=Object.entries(mot).sort((a,b)=>b[1]-a[1]).slice(0,5),topJ=Object.entries(jur).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const diasEst=dias.filter(d=>entradasDia(d).length).length,t1=tx(ev),t0=tx(ant.ev);
+  const var_=t1!==null&&t0!==null?t1-t0:null;
+  $("#relSemana").innerHTML=`<div class="row" style="justify-content:space-between;align-items:center"><h3 style="margin:0">📊 Relatório semanal · ${fmt(dias[0])} a ${fmt(dias[6])}</h3>
+      ${topJ.length?`<button class="btn p" id="relRev">▶ Revisar as ${topJ.length} que mais caíram</button>`:""}</div>
+    <p class="small" style="margin:6px 0 12px">${ev.length} resposta(s) · ${new Set(ev.map(e=>e.id)).size} jurisprudência(s) · ${diasEst}/7 dias estudados · acerto <b>${t1===null?"—":t1+"%"}</b>${var_===null?"":` (<span style="color:${var_>=0?"var(--ok)":"var(--bad)"}">${var_>=0?"+":""}${var_} p.p.</span> em relação à semana anterior)`}</p>
+    <div class="rel7"><div><b>5 motivos de erro mais frequentes</b>${topM.length?`<ol>${topM.map(([m,n])=>`<li>${esc(m)} – <b>${n}</b></li>`).join("")}</ol>`:'<p class="small">Nenhum erro na semana 🎉</p>'}</div>
+      <div><b>Jurisprudências que mais caíram</b>${topJ.length?`<ol>${topJ.map(([id,n])=>{const c=cardPor(id);return`<li><a href="#" data-ed="${id}" style="color:var(--pri)">${esc(c.tipo)} ${esc(c.numero)}</a> – ${esc(c.assunto.slice(0,50))} · <b>${n}</b> erro(s)</li>`}).join("")}</ol>`:'<p class="small">—</p>'}</div></div>`;
+  if($("#relRev"))$("#relRev").onclick=()=>{const cs=topJ.map(([id])=>cardPor(id)).filter(Boolean);irPara("estudar");jogo=false;$("#fEst").value="fc";fila=cs.sort(()=>Math.random()-.5);feitos=0;acertos=0;totalSessao=fila.length;proximo();toast("Revisão das que mais caíram na semana")};
+  $("#relSemana").onclick=e=>{const a=e.target.closest("[data-ed]");if(a){e.preventDefault();editar(a.dataset.ed)}};
+  if(fim===iso(hoje())&&new Date().getDay()===0){db.cfg.relVisto=semanaKey(fim);salvar()}
+}
+function relPendente(){const t=iso(hoje()),dw=new Date().getDay();if(dw!==0&&dw!==1)return false;const k=dw===0?semanaKey(t):semanaKey(addDias(-1));return db.cfg.relVisto!==k&&dadosSemana(dw===0?t:addDias(-1)).ev.length>0}
+function abrirRelatorio(){const dw=new Date().getDay();diaSel=dw===1?addDias(-1):iso(hoje());db.cfg.relVisto=semanaKey(diaSel);salvar();irPara("diario")}
+
+/* ================= REVISÕES DO DIA ================= */
+const MODOS={fc:"Flashcard",ce:"Certo ou Errado",lac:"Lacunas",par:"Pares",qst:"Questão de prova",ant:"Registro anterior"};
+const RES=["Errei","Difícil","Bom","Fácil"];
+const MOT_ERR=["Não sabia / não estudei ainda","Esqueci a exceção ou ressalva","Confundi com outra jurisprudência","Errei número, prazo ou percentual","Troquei o sujeito / a parte","Li rápido / falta de atenção","Fui pela intuição (chute)","Outro"];
+const MOT_OK=["Sabia com segurança","Lembrei por associação / palavra-chave","Por eliminação","Chute certo","Outro"];
+let diaSel=null;
+function entradasDia(d){
+  const ev=(db.diario[d]||[]).slice();
+  const reg=new Set(ev.map(e=>e.t));
+  db.cards.forEach(c=>(c.srs.hist||[]).forEach(h=>{if(h.d===d&&!(h.t&&reg.has(h.t)))ev.push({t:h.t||0,id:c.id,r:h.r,modo:"ant"})}));
+  return ev.sort((a,b)=>(a.t||0)-(b.t||0));
+}
+const acerto=e=>e.modo==="qst"||e.modo==="ce"||e.modo==="par"&&e.papel!=="confundida"?e.r>=2:e.r>=1;
+function motivoAuto(e){
+  const c=cardPor(e.id),num=x=>{const k=cardPor(x);return k?`${k.tipo} ${k.numero}`:"outra jurisprudência"};
+  if(e.modo==="fc")return["Não lembrou a tese","Lembrou com dificuldade","Lembrou bem","Lembrou com facilidade"][e.r]+(e.dir==="tese"?" <small>(tese → número)</small>":"");
+  if(e.modo==="ce"){
+    if(e.auto)return"Sem trecho para gerar assertiva (contado como acerto)";
+    const tp=TIPOS_PEG[e.peg]||{n:"assertiva"};
+    if(e.certo)return e.r>=2?"Reconheceu a assertiva <b>correta</b>":"Desconfiou de assertiva correta (marcou Errado)";
+    const tr=e.orig?` <small>(“${esc(e.novo)}” no lugar de “${esc(e.orig)}”)</small>`:e.origem?` <small>(texto da ${esc(e.origem)})</small>`:"";
+    return(e.r>=2?"Identificou a pegadinha: ":"Caiu na pegadinha: ")+`<b>${esc(tp.n)}</b>`+tr;
+  }
+  if(e.modo==="lac"){
+    let t=e.desistiu?"Marcou “Não sei”":`${e.ok}/${e.tot} lacuna(s) corretas`;if(e.dica)t+=" · usou dica";
+    if(e.falhas&&e.falhas.length)t+=`<br><small>${e.falhas.map(f=>`esperado “${esc(f.w)}”${f.dig?`, digitou “${esc(f.dig)}”`:""}`).join(" · ")}</small>`;
+    return t;
+  }
+  if(e.modo==="qst")return`${e.banca?esc(e.banca)+": ":""}marcou <b>${esc(e.resp)}</b>, gabarito <b>${esc(e.gab)}</b>`;
+  if(e.modo==="par")return e.papel==="confundida"?`Foi confundida com a ${esc(num(e.outro))}`:e.acertou?`Distinguiu corretamente da ${esc(num(e.outro))}`:`Confundiu com a ${esc(num(e.outro))}`;
+  return"Resposta registrada antes da versão 8 (sem detalhes)";
+}
+function categoria(e){
+  if(e.motivo)return e.motivo;
+  const ok=acerto(e);
+  if(e.modo==="ce"&&!e.auto){if(e.certo)return ok?"Reconheceu assertiva correta":"Desconfiou de assertiva correta";return(ok?"Identificou: ":"Pegadinha: ")+((TIPOS_PEG[e.peg]||{}).n||"assertiva")}
+  if(e.modo==="qst")return ok?"Acertou questão de prova":"Errou questão de prova";
+  if(e.modo==="lac")return ok?"Lacunas preenchidas":"Esqueceu termo-chave (lacunas)";
+  if(e.modo==="par")return ok?"Distinguiu par de confusão":"Confundiu jurisprudências";
+  return ok?(e.r===1?"Lembrou com dificuldade":"Lembrou a tese"):"Não lembrou a tese";
+}
+function renderDiario(){
+  const t=iso(hoje());if(!diaSel)diaSel=t;$("#dDia").value=diaSel;$("#dProx").disabled=diaSel>=t;
+  renderRelSemana();
+  const fr=$("#dRes").value,fm=$("#dMd").value,fd=$("#dDisc").value;
+  const todas=entradasDia(diaSel).filter(e=>cardPor(e.id));
+  const ev=todas.filter(e=>{const c=cardPor(e.id),ok=acerto(e);
+    return(!fr||(fr==="err"?!ok:fr==="ok"?ok&&e.r!==1:e.r===1))&&(!fm||e.modo===fm)&&discOk(c,fd)});
+  const ok=todas.filter(acerto).length,er=todas.length-ok,ids=new Set(todas.map(e=>e.id));
+  const cont=[0,0,0,0];todas.forEach(e=>cont[e.r]=(cont[e.r]||0)+1);
+  const ts=todas.map(e=>e.t).filter(Boolean),per=ts.length?`${new Date(Math.min(...ts)).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})} – ${new Date(Math.max(...ts)).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})}`:"—";
+  const k=(v,l,i="",cor="")=>`<div class="kpi"><b${cor?` style="color:${cor}"`:""}>${v}</b><span>${l}</span>${i?`<i>${i}</i>`:""}</div>`;
+  $("#kpiDia").innerHTML=k(todas.length,"Respostas",`período ${per}`)+k(ids.size,"Jurisprudências vistas",`meta ${db.cfg.meta}/dia`)+k(ok,"Acertos","","var(--ok)")+k(er,"Erros","","var(--bad)")+
+    k(todas.length?Math.round(ok/todas.length*100)+"%":"—","Taxa de acerto")+k(`<span style="font-size:20px">${cont[3]} · ${cont[2]} · ${cont[1]} · ${cont[0]}</span>`,"Fácil · Bom · Difícil · Errei","nas respostas de flashcard e lacunas");
+  // motivos
+  const g={};todas.forEach(e=>{const kk=categoria(e),o=g[kk]=g[kk]||{n:0,ok:0};o.n++;if(acerto(e))o.ok++});
+  const lst=Object.entries(g).sort((a,b)=>(b[1].n-b[1].ok)-(a[1].n-a[1].ok)||b[1].n-a[1].n),mx=Math.max(1,...lst.map(x=>x[1].n));
+  $("#dMot").innerHTML=lst.length?lst.map(([n,o])=>`<div class="hbar"><span title="${esc(n)}">${esc(n)}</span><div class="bar" style="width:${Math.max(10,o.n/mx*100)}%"><i style="width:${o.ok/o.n*100}%;background:var(--ok)"></i><i style="width:${(o.n-o.ok)/o.n*100}%;background:var(--bad)"></i></div><span>${o.n} · ${o.n-o.ok} erro(s)</span></div>`).join("")+'<div class="legend"><span><b style="background:var(--ok)"></b>Acertos</span><span><b style="background:var(--bad)"></b>Erros</span><span>Motivos informados por você têm prioridade sobre os automáticos.</span></div>':'<p class="small">Nenhuma revisão neste dia.</p>';
+  const gm={};todas.forEach(e=>{const o=gm[e.modo]=gm[e.modo]||{n:0,ok:0};o.n++;if(acerto(e))o.ok++});
+  $("#dModo").innerHTML=Object.keys(gm).length?Object.entries(gm).map(([m,o])=>`<div class="hbar"><span>${MODOS[m]||m}</span><div class="bar"><i style="width:${o.ok/o.n*100}%;background:var(--ok)"></i><i style="width:${(o.n-o.ok)/o.n*100}%;background:var(--bad)"></i></div><span>${o.ok}/${o.n} · ${Math.round(o.ok/o.n*100)}%</span></div>`).join("")+
+    `<p class="small" style="margin-top:10px">${todas.filter(e=>e.jogo).length} resposta(s) no Desafio do dia.</p>`:'<p class="small">Nenhuma revisão neste dia.</p>';
+  // lista agrupada
+  const grupos=new Map();ev.forEach(e=>{if(!grupos.has(e.id))grupos.set(e.id,[]);grupos.get(e.id).push(e)});
+  $("#dCont").textContent=`${ev.length} resposta(s) · ${grupos.size} jurisprudência(s)`;
+  $("#dLista").innerHTML=grupos.size?[...grupos.entries()].map(([id,es])=>{const c=cardPor(id),okc=es.filter(acerto).length;
+    return`<div class="dj"><header><div><b data-ed="${id}" style="cursor:pointer">${esc(c.tipo)} ${esc(c.numero)}</b> – ${esc(c.assunto)}<div style="margin-top:6px">${tagsDisc(c)}${c.aula?`<span class="tag">📚 ${esc(c.aula)}</span>`:""}</div></div>
+      <span class="small">${okc}/${es.length} acerto(s) · situação: ${situacao(c)[0]} · próxima: ${fmt(c.srs.due)}</span></header>
+      ${es.map(e=>{const okk=acerto(e),idx=(db.diario[diaSel]||[]).indexOf(e),opts=okk?MOT_OK:MOT_ERR;
+        const bd=e.modo==="qst"||e.modo==="ce"||e.modo==="par"&&e.papel!=="confundida"?`<span class="bdg ${okk?"b2":"b0"}">${okk?"Acertou":"Errou"}</span>`:`<span class="bdg b${e.r}">${RES[e.r]}</span>`;
+        return`<div class="tent"><span class="small">${e.t?new Date(e.t).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}):"—"}</span>
+          <span><span class="bdg bm">${MODOS[e.modo]||e.modo}</span>${e.jogo?' <span class="small">🎮</span>':""}</span><span>${bd}</span>
+          <span class="mot">${motivoAuto(e)}${e.nota?`<br><small>📝 ${esc(e.nota)}</small>`:""}</span>
+          <span class="usr">${idx>=0?`<select data-mi="${idx}"><option value="">${okk?"Motivo do acerto…":"Motivo do erro…"}</option>${opts.map(o=>`<option${o===e.motivo?" selected":""}>${o}</option>`).join("")}</select>
+            <input data-ni="${idx}" placeholder="Anotação (opcional)" value="${esc(e.nota||"")}" style="margin-top:4px">`:'<span class="small">—</span>'}</span></div>`}).join("")}</div>`}).join(""):`<div class="empty">${todas.length?"Nenhuma resposta com esses filtros.":"Nenhuma revisão registrada em "+fmt(diaSel)+"."}</div>`;
+}
+function setMotivo(i,campo,v){const e=(db.diario[diaSel]||[])[i];if(!e)return;e[campo]=v;e.motT=Date.now();diarioMudou=true;salvar()}
+$("#dLista").onchange=e=>{const s2=e.target;if(s2.dataset.mi!==undefined){setMotivo(+s2.dataset.mi,"motivo",s2.value);renderDiario()}else if(s2.dataset.ni!==undefined)setMotivo(+s2.dataset.ni,"nota",s2.value.trim())};
+$("#dLista").onclick=e=>{const b=e.target.closest("[data-ed]");if(b)editar(b.dataset.ed)};
+$("#dDia").onchange=()=>{if($("#dDia").value){diaSel=$("#dDia").value>iso(hoje())?iso(hoje()):$("#dDia").value;renderDiario()}};
+$("#dAnt").onclick=()=>{const x=new Date(diaSel+"T00:00");x.setDate(x.getDate()-1);diaSel=iso(x);renderDiario()};
+$("#dProx").onclick=()=>{const x=new Date(diaSel+"T00:00");x.setDate(x.getDate()+1);diaSel=iso(x)>iso(hoje())?iso(hoje()):iso(x);renderDiario()};
+$("#dHoje").onclick=()=>{diaSel=iso(hoje());renderDiario()};
+["#dRes","#dMd","#dDisc"].forEach(x=>$(x).onchange=renderDiario);
+$("#dRevErr").onclick=()=>{
+  const ids=[...new Set(entradasDia(diaSel).filter(e=>!acerto(e)).map(e=>e.id))].map(cardPor).filter(Boolean);
+  if(!ids.length){toast("Nenhum erro neste dia 🎉");return}
+  irPara("estudar");jogo=false;fila=ids.sort(()=>Math.random()-.5);feitos=0;acertos=0;totalSessao=fila.length;proximo();toast(`${ids.length} jurisprudência(s) erradas em ${fmt(diaSel)}`);
+};
+
 /* ================= MAPA DE DESEMPENHO ================= */
 function renderMapa(){
   const d=$("#mDisc").value,per=+$("#mPer").value,t=iso(hoje());
-  const cards=db.cards.filter(c=>!d||c.disciplina===d);
+  const cards=db.cards.filter(c=>discOk(c,d));
   const ini=per?addDias(-(per-1)):"0000";
   const hist=cards.flatMap(c=>c.srs.hist).filter(h=>h.d>=ini);
   const ac=hist.filter(h=>h.r>=1).length,er=hist.filter(h=>h.r===0).length,dif=hist.filter(h=>h.r===1).length;
@@ -1384,7 +1701,7 @@ function renderMapa(){
     return`<div class="hbar"><span title="${esc(nome)}">${esc(nome)}</span><div class="bar" style="width:${Math.max(8,o.n/m*100)}%" title="${o.v} vistas · ${o.n-o.v} não vistas"><i style="width:${o.dom/o.n*100}%;background:var(--ok)"></i><i style="width:${(o.v-o.dom)/o.n*100}%;background:var(--pri)"></i></div><span>${o.n} · ${o.n-o.v} n/v · ${tx===null?"—":tx+"%"}</span></div>`}).join("")||'<p class="small">Sem dados.</p>'};
   const leg='<div class="legend"><span><b style="background:var(--ok)"></b>Dominadas</span><span><b style="background:var(--pri)"></b>Vistas</span><span><b style="background:var(--bd)"></b>Não vistas</span><span style="margin-left:auto">total · não vistas · % acerto</span></div>';
   $("#gDisc").innerHTML=barras(agrupar(c=>c.disciplina))+leg;
-  $("#gTema").innerHTML=barras((()=>{const g={};cards.forEach(c=>[c.tema,...(c.temasRel||[])].forEach(kk=>{const o=g[kk]=g[kk]||{n:0,v:0,ok:0,err:0,dom:0};o.n++;if(c.srs.last)o.v++;o.ok+=c.srs.ok;o.err+=c.srs.err;if(c.srs.int>=21)o.dom++}));return Object.entries(g).sort((a,b)=>b[1].n-a[1].n||cmp(a[0],b[0]))})())+leg+'<p class="small">Inclui matérias relacionadas (uma jurisprudência pode contar em mais de uma matéria).</p>';
+  $("#gTema").innerHTML=barras((()=>{const g={};cards.forEach(c=>[...new Set([c.tema,...temasDe(c,d)])].forEach(kk=>{const o=g[kk]=g[kk]||{n:0,v:0,ok:0,err:0,dom:0};o.n++;if(c.srs.last)o.v++;o.ok+=c.srs.ok;o.err+=c.srs.err;if(c.srs.int>=21)o.dom++}));return Object.entries(g).sort((a,b)=>b[1].n-a[1].n||cmp(a[0],b[0]))})())+leg+'<p class="small">Inclui matérias relacionadas (uma jurisprudência pode contar em mais de uma matéria).</p>';
   // tempo sem ver
   const faixas=[["Até 7 dias",0,7],["8 a 15 dias",8,15],["16 a 30 dias",16,30],["Mais de 30 dias",31,1e9]];
   const cont=faixas.map(([n,a,b])=>[n,cards.filter(c=>c.srs.last&&diasEntre(c.srs.last,t)>=a&&diasEntre(c.srs.last,t)<=b).length]);
@@ -1406,10 +1723,10 @@ let taxOrdem=[];
 function renderTax(){
   taxOrdem=discs();
   $("#taxList").innerHTML=taxOrdem.map((d,i)=>{
-    const n=db.cards.filter(c=>c.disciplina===d).length;const ms=(db.tax[d]||[]).slice().sort(cmp);db.tax[d]=ms;
+    const n=db.cards.filter(c=>discsDe(c).includes(d)).length;const ms=(db.tax[d]||[]).slice().sort(cmp);db.tax[d]=ms;
     return`<div class="disc"><header><b>${esc(d)}</b><span class="small">${n} jurisprudência(s) · ${ms.length} matéria(s)</span>
       <span class="row"><button class="btn s" data-a="renD" data-i="${i}">✎ Renomear</button><button class="btn s d" data-a="delD" data-i="${i}">✕ Excluir</button></span></header>
-      <div class="chips">${ms.map((m,j)=>`<span class="chip">${esc(m)} <span class="small">(${db.cards.filter(c=>c.disciplina===d&&(c.tema===m||(c.temasRel||[]).includes(m))).length})</span><button title="Renomear" data-a="renM" data-i="${i}" data-j="${j}">✎</button><button title="Excluir" data-a="delM" data-i="${i}" data-j="${j}">✕</button></span>`).join("")||'<span class="small">Nenhuma matéria cadastrada.</span>'}</div>
+      <div class="chips">${ms.map((m,j)=>`<span class="chip">${esc(m)} <span class="small">(${db.cards.filter(c=>temasDe(c,d).includes(m)).length})</span><button title="Renomear" data-a="renM" data-i="${i}" data-j="${j}">✎</button><button title="Excluir" data-a="delM" data-i="${i}" data-j="${j}">✕</button></span>`).join("")||'<span class="small">Nenhuma matéria cadastrada.</span>'}</div>
       <div class="row"><input placeholder="Nova matéria" id="nm${i}" style="flex:1"><button class="btn s" data-a="addM" data-i="${i}">＋ Adicionar matéria</button></div></div>`}).join("");
   const sem=db.cards.filter(c=>!c.disciplina).length;
   if(sem)$("#taxList").insertAdjacentHTML("beforeend",`<p class="small">${sem} jurisprudência(s) sem disciplina — classifique-as em Jurisprudências.</p>`);
@@ -1420,21 +1737,42 @@ $("#taxList").onclick=e=>{
   const d=taxOrdem[+b.dataset.i],a=b.dataset.a,ms=db.tax[d]||[],m=ms[+b.dataset.j];
   if(a==="addM"){const v=$("#nm"+b.dataset.i).value.trim();if(!v)return;if(v===SEM||ms.includes(v)){toast("Matéria já existe");return}ms.push(v)}
   if(a==="renD"){const v=(prompt("Novo nome da disciplina:",d)||"").trim();if(!v||v===d)return;
-    db.tax[v]=[...new Set([...(db.tax[v]||[]),...ms])];delete db.tax[d];db.cards.forEach(c=>{if(c.disciplina===d)c.disciplina=v})}
-  if(a==="delD"){const n=db.cards.filter(c=>c.disciplina===d).length;
+    db.tax[v]=[...new Set([...(db.tax[v]||[]),...ms])];delete db.tax[d];db.cards.forEach(c=>{if(c.disciplina===d)c.disciplina=v;(c.outras||[]).forEach(o=>{if(o.disciplina===d)o.disciplina=v});c.outras=(c.outras||[]).filter(o=>o.disciplina!==c.disciplina)})}
+  if(a==="delD"){const n=db.cards.filter(c=>discsDe(c).includes(d)).length;
     if(!confirm(`Excluir a disciplina “${d}”?${n?`\n${n} jurisprudência(s) ficarão sem disciplina e com matéria “${SEM}”.`:""}`))return;
-    delete db.tax[d];db.cards.forEach(c=>{if(c.disciplina===d){c.disciplina="";c.tema=SEM;c.temasRel=[]}})}
+    delete db.tax[d];db.cards.forEach(c=>{c.outras=(c.outras||[]).filter(o=>o.disciplina!==d);if(c.disciplina===d){const o=c.outras.shift();if(o){c.disciplina=o.disciplina;c.tema=o.tema;c.temasRel=o.temasRel}else{c.disciplina="";c.tema=SEM;c.temasRel=[]}}})}
   if(a==="renM"){const v=(prompt("Novo nome da matéria:",m)||"").trim();if(!v||v===m)return;
-    db.tax[d]=[...new Set(ms.map(x=>x===m?v:x))];db.cards.forEach(c=>{if(c.disciplina!==d)return;if(c.tema===m)c.tema=v;c.temasRel=[...new Set((c.temasRel||[]).map(x=>x===m?v:x))].filter(x=>x!==c.tema)})}
-  if(a==="delM"){const n=db.cards.filter(c=>c.disciplina===d&&c.tema===m).length;
+    db.tax[d]=[...new Set(ms.map(x=>x===m?v:x))];db.cards.forEach(c=>{if(c.disciplina!==d)return;if(c.tema===m)c.tema=v;c.temasRel=[...new Set((c.temasRel||[]).map(x=>x===m?v:x))].filter(x=>x!==c.tema)});db.cards.forEach(c=>(c.outras||[]).forEach(o=>{if(o.disciplina!==d)return;if(o.tema===m)o.tema=v;o.temasRel=[...new Set(o.temasRel.map(x=>x===m?v:x))].filter(x=>x!==o.tema)}))}
+  if(a==="delM"){const n=db.cards.filter(c=>temasDe(c,d).includes(m)).length;
     if(!confirm(`Excluir a matéria “${m}”?${n?`\n${n} jurisprudência(s) passarão para “${SEM}”.`:""}`))return;
-    db.tax[d]=ms.filter(x=>x!==m);db.cards.forEach(c=>{if(c.disciplina!==d)return;if(c.tema===m)c.tema=SEM;c.temasRel=(c.temasRel||[]).filter(x=>x!==m)})}
+    db.tax[d]=ms.filter(x=>x!==m);db.cards.forEach(c=>{if(c.disciplina!==d)return;if(c.tema===m)c.tema=SEM;c.temasRel=(c.temasRel||[]).filter(x=>x!==m)});db.cards.forEach(c=>(c.outras||[]).forEach(o=>{if(o.disciplina!==d)return;if(o.tema===m)o.tema=SEM;o.temasRel=o.temasRel.filter(x=>x!==m)}))}
   salvar();refresh();
 };
+function renderAulas(){
+  const al=aulasLista();
+  $("#aulaList").innerHTML=al.map((a,i)=>`<span class="chip">${esc(a)} <span class="small">(${db.cards.filter(c=>c.aula===a).length}${db.cards.some(c=>c.aula===a&&c.essencial)?` · ♥ ${db.cards.filter(c=>c.aula===a&&c.essencial).length}`:""})</span><button title="Renomear" data-ar="${i}">✎</button><button title="Excluir" data-ad="${i}">✕</button></span>`).join("")||'<span class="small">Nenhuma aula cadastrada.</span>';
+}
+function renderTagsCfg(){
+  const ts=todasTags();
+  $("#tagList").innerHTML=ts.map((t,i)=>`<span class="chip">#${esc(t)} <span class="small">(${db.cards.filter(c=>(c.tags||[]).includes(t)).length})</span><button title="Renomear" data-tgr="${i}">✎</button><button title="Excluir" data-tgd="${i}">✕</button></span>`).join("")||'<span class="small">Nenhuma etiqueta criada ainda – inclua na edição da jurisprudência.</span>';
+}
+$("#tagList").onclick=e=>{const b=e.target.closest("button");if(!b)return;const ts=todasTags();
+  if(b.dataset.tgr!==undefined){const t=ts[+b.dataset.tgr],v=limparTag(prompt("Novo nome da etiqueta:",t)||"");if(!v||v===t)return;db.cards.forEach(c=>{if((c.tags||[]).includes(t))c.tags=[...new Set(c.tags.map(x=>x===t?v:x))]})}
+  if(b.dataset.tgd!==undefined){const t=ts[+b.dataset.tgd];if(!confirm(`Remover a etiqueta #${t} de todas as jurisprudências?`))return;db.cards.forEach(c=>c.tags=(c.tags||[]).filter(x=>x!==t))}
+  salvar();refresh()};
+$("#addAula").onclick=()=>{const vs=$("#novaAula").value.split(/[;\n]/).map(x=>x.trim()).filter(Boolean);if(!vs.length)return;let n=0;
+  vs.forEach(v=>{if(!db.aulas.some(a=>norm(a)===norm(v))){db.aulas.push(v);n++}});db.aulas.sort(cmp);$("#novaAula").value="";salvar();refresh();toast(n?`${n} aula(s) adicionada(s)`:"Aula(s) já cadastrada(s)")};
+$("#aulaList").onclick=e=>{const b=e.target.closest("button");if(!b)return;const al=aulasLista();
+  if(b.dataset.ar!==undefined){const a=al[+b.dataset.ar],v=(prompt("Novo nome da aula:",a)||"").trim();if(!v||v===a)return;
+    db.aulas=[...new Set(db.aulas.map(x=>x===a?v:x).concat(db.aulas.includes(a)?[]:[v]))].sort(cmp);db.cards.forEach(c=>{if(c.aula===a)c.aula=v})}
+  if(b.dataset.ad!==undefined){const a=al[+b.dataset.ad],n=db.cards.filter(c=>c.aula===a).length;
+    if(!confirm(`Excluir a aula “${a}”?${n?`\n${n} jurisprudência(s) ficarão sem aula.`:""}`))return;
+    db.aulas=db.aulas.filter(x=>x!==a);db.cards.forEach(c=>{if(c.aula===a){c.aula="";c.essencial=false}})}
+  salvar();refresh()};
 $$("#cfgTabs button").forEach(b=>b.onclick=()=>{$$("#cfgTabs button").forEach(x=>x.classList.toggle("on",x===b));$$("#config .sub").forEach(s=>s.classList.toggle("on",s.id===b.dataset.t))});
 
 /* ================= IMPORTAR PLANILHA / EXPORTAR ================= */
-const MAPA={tipo:["tipo"],numero:["numero","nº","n°","no"],assunto:["assunto","titulo","frente"],tese:["tese","enunciado","texto","verso","resposta","redacao"],tema:["tema","materia","matéria"],disciplina:["disciplina"],aula:["aula"],fonte:["fonte"],obs:["observacoes","observacao","obs"],cobrada:["mais cobrada","mais cobradas","cobrada"],falsas:["pegadinhas","pegadinha","versoes falsas","falsas"],temasRel:["materias relacionadas","temas relacionados","relacionadas"]};
+const MAPA={tipo:["tipo"],numero:["numero","nº","n°","no"],assunto:["assunto","titulo","frente"],tese:["tese","enunciado","texto","verso","resposta","redacao"],tema:["tema","materia","matéria"],disciplina:["disciplina"],aula:["aula"],fonte:["fonte"],obs:["observacoes","observacao","obs"],cobrada:["mais cobrada","mais cobradas","cobrada"],falsas:["pegadinhas","pegadinha","versoes falsas","falsas"],temasRel:["materias relacionadas","temas relacionados","relacionadas"],outras:["outras disciplinas","disciplinas adicionais"],tags:["etiquetas","tags"],essencial:["essencial na aula","essencial"]};
 function importarLinhas(linhas){
   const hi=linhas.findIndex(r=>Array.isArray(r)&&r.some(v=>["numero","nº","n°"].includes(norm(v))));
   if(hi<0){toast("Cabeçalho com a coluna “Número” não encontrado");return}
@@ -1444,11 +1782,14 @@ function importarLinhas(linhas){
   linhas.slice(hi+1).forEach(r=>{
     if(!r)return;const g=k=>idx[k]!==undefined?String(r[idx[k]]??"").trim():"";
     const o={tipo:g("tipo")||"Súmula",numero:g("numero"),assunto:g("assunto"),tese:g("tese"),tema:g("tema"),disciplina:g("disciplina"),aula:g("aula"),fonte:g("fonte"),obs:g("obs"),falsas:g("falsas")};
+    const tgV=g("tags");if(tgV)o.tags=tgV.split(/[,;\s]+/).map(limparTag).filter(Boolean);
+    const esV=g("essencial");if(esV)o.essencial=/^(s|sim|x|1|true|♥)/i.test(esV);
+    const outV=g("outras");if(outV)o.outras=outV.split("|").map(x=>{const[d,r]=x.split(">");const ms=(r||"").split(";").map(y=>y.trim()).filter(Boolean);return{disciplina:(d||"").trim(),tema:ms[0]||SEM,temasRel:ms.slice(1)}}).filter(x=>x.disciplina);
     const relV=g("temasRel");if(relV)o.temasRel=relV.split(/[;|]/).map(x=>x.trim()).filter(Boolean);
     const cobV=g("cobrada");o.cobrada=/^(s|sim|x|1|true|★|⭐)/i.test(cobV);
     if(!o.numero)return;
     const ex=mapa.get(chave(o));
-    if(ex){for(const k of["assunto","tese","tema","disciplina","aula","fonte","obs","falsas"])if(o[k])ex[k]=o[k];if(cobV)ex.cobrada=o.cobrada;if(o.temasRel){ex.temasRel=o.temasRel;o.temasRel.forEach(m=>addTax(ex.disciplina,m))}addTax(ex.disciplina,ex.tema);atu++}
+    if(ex){for(const k of["assunto","tese","tema","disciplina","aula","fonte","obs","falsas"])if(o[k])ex[k]=o[k];if(cobV)ex.cobrada=o.cobrada;if(o.outras)ex.outras=o.outras;if(o.tags)ex.tags=[...new Set([...(ex.tags||[]),...o.tags])];if(esV)ex.essencial=o.essencial&&!!ex.aula;if(o.temasRel){ex.temasRel=o.temasRel;o.temasRel.forEach(m=>addTax(ex.disciplina,m))}addTax(ex.disciplina,ex.tema);atu++}
     else{const c=novoCartao(o);db.cards.push(c);mapa.set(chave(c),c);addTax(c.disciplina,c.tema);(c.temasRel||[]).forEach(m=>addTax(c.disciplina,m));novos++}
   });
   salvar();refresh();toast(`${novos} novas · ${atu} atualizadas`);
@@ -1475,7 +1816,7 @@ $("#arq").onchange=e=>{
 function baixar(nome,conteudo,tipo){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([conteudo],{type:tipo}));a.download=nome;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 $("#expJson").onclick=()=>baixar(`flashsun_backup_${iso(hoje())}.json`,JSON.stringify(db,null,1),"application/json");
 function planilha(linhas,nome){if(typeof XLSX==="undefined"){toast("Biblioteca do Excel não carregou");return}const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(linhas),"Jurisprudencias");XLSX.writeFile(wb,nome)}
-$("#expXlsx").onclick=()=>planilha([["Tipo","Número","Assunto","Tese","Disciplina","Matéria","Matérias relacionadas","Aula","Fonte","Observações","Pegadinhas","Mais cobrada","Situação","Acertos","Erros","Última revisão","Próxima revisão"],...db.cards.map(c=>[c.tipo,c.numero,c.assunto,c.tese,c.disciplina,c.tema,(c.temasRel||[]).join("; "),c.aula,c.fonte,c.obs,c.falsas||"",c.cobrada?"Sim":"",situacao(c)[0],c.srs.ok,c.srs.err,fmt(c.srs.last),fmt(c.srs.due)])],`flashsun_${iso(hoje())}.xlsx`);
+$("#expXlsx").onclick=()=>planilha([["Tipo","Número","Assunto","Tese","Disciplina","Matéria","Matérias relacionadas","Outras disciplinas","Aula","Essencial na aula","Etiquetas","Questões de prova","Fonte","Observações","Pegadinhas","Mais cobrada","Situação","Acertos","Erros","Última revisão","Próxima revisão"],...db.cards.map(c=>[c.tipo,c.numero,c.assunto,c.tese,c.disciplina,c.tema,(c.temasRel||[]).join("; "),(c.outras||[]).map(o=>o.disciplina+" > "+[o.tema,...o.temasRel].join("; ")).join(" | "),c.aula,c.essencial?"Sim":"",(c.tags||[]).map(t=>"#"+t).join(" "),(c.questoes||[]).length,c.fonte,c.obs,c.falsas||"",c.cobrada?"Sim":"",situacao(c)[0],c.srs.ok,c.srs.err,fmt(c.srs.last),fmt(c.srs.due)])],`flashsun_${iso(hoje())}.xlsx`);
 $("#modelo").onclick=()=>planilha([["Tipo","Número","Assunto","Tese","Disciplina","Matéria","Aula","Fonte","Observações","Mais cobrada"],["Súmula","85","Compensação de jornada","(cole aqui o enunciado)","Direito do Trabalho","Duração do trabalho","Aula 05","TST","","Sim"]],"modelo_flashsun.xlsx");
 $("#zerarProg").onclick=()=>{if(confirm("Zerar todo o histórico de revisões?")){db.cards.forEach(c=>c.srs=srsNovo());db.log={};db.cfg.lacStats={ok:0,tot:0};salvar();refresh();toast("Progresso zerado")}};
 $("#apagar").onclick=()=>{if(confirm("Apagar TODAS as jurisprudências? Faça um backup antes.")){db.cards=[];db.log={};salvar();refresh()}};
@@ -1625,7 +1966,7 @@ function processar(paginas){
 function importarCandidatos(){
   try{
     const mapa=new Map(db.cards.map(c=>[chave(c),c]));let n=0,a=0;
-    const disc=$("#pDisc").value||"",tema=$("#pTema").value||SEM,aula=$("#pAula").value.trim();
+    const disc=$("#pDisc").value||"",tema=$("#pTema").value||SEM,aula=$("#pAula").value;
     $$(".pSel").forEach(cb=>{
       if(!cb.checked)return;const i=+cb.dataset.i,c=candidatos[i];
       const ass=document.querySelector(`.pAss[data-i="${i}"]`).value.trim(),tese=document.querySelector(`.pTese[data-i="${i}"]`).value.trim();
@@ -1741,11 +2082,13 @@ $("#cfgRegra").onclick=()=>{db.cfg.meta=10;db.cfg.lembrete="19:00";db.cfg.repeti
 setInterval(checarLembrete,60000);
 
 function refresh(){
+  renderTagBar("#fTags",fTagSel);
   preencherFiltros();kpisEstudo();
   if($("#juris").classList.contains("on"))renderLista();
   if($("#mapa").classList.contains("on"))renderMapa();
-  if($("#config").classList.contains("on")){renderTax();renderIcones();renderTemas();renderNuvem()}
+  if($("#config").classList.contains("on")){renderTax();renderAulas();renderTagsCfg();renderIcones();renderTemas();renderNuvem()}
   if($("#peg").classList.contains("on"))renderPeg();
+  if($("#diario").classList.contains("on"))renderDiario();
 }
 
 /* ================= NUVEM: GITHUB GIST ================= */
@@ -1821,16 +2164,18 @@ function sair(){
   if(!confirm("Desconectar o GitHub deste aparelho? Os dados continuam aqui e no Gist."))return;
   ls.del(GH_KEY);gh=null;sync.ver="";sync.httpEtag="";sync.snap=null;sync.primeira=true;salvarSync();setNuvem("off");renderNuvem();
 }
-let hashCards=new Map(),hashTax="",hashCfg="",hashesProntos=false;
+let hashCards=new Map(),hashTax="",hashCfg="",hashesProntos=false,diarioMudou=false;
 const semMod=c=>{const{mod,...r}=c;return JSON.stringify(r)};
 const cfgCompartilhada=()=>{const{lacStats,mini,avisado,ultimoAviso,cfgMod,...r}=db.cfg;return JSON.stringify(r)};
-function indexarHashes(){hashesProntos=true;hashCards=new Map(db.cards.map(c=>[c.id,semMod(c)]));hashTax=JSON.stringify(db.tax);hashCfg=cfgCompartilhada()}
+const taxHash=()=>JSON.stringify([db.tax,db.aulas||[]]);
+function indexarHashes(){hashesProntos=true;hashCards=new Map(db.cards.map(c=>[c.id,semMod(c)]));hashTax=taxHash();hashCfg=cfgCompartilhada()}
 function carimbar(){
   const agora=Date.now(),vivos=new Set();let mudou=false;db.del=db.del||{};
   db.cards.forEach(c=>{vivos.add(c.id);const h=semMod(c);if(hashCards.get(c.id)!==h){c.mod=agora;hashCards.set(c.id,semMod(c));mudou=true}});
   [...hashCards.keys()].forEach(id=>{if(!vivos.has(id)){db.del[id]=agora;hashCards.delete(id);mudou=true}});
-  const ht=JSON.stringify(db.tax);if(ht!==hashTax){db.taxMod=agora;hashTax=ht;mudou=true}
+  const ht=taxHash();if(ht!==hashTax){db.taxMod=agora;hashTax=ht;mudou=true}
   const hc=cfgCompartilhada();if(hc!==hashCfg){db.cfg.cfgMod=agora;hashCfg=cfgCompartilhada();mudou=true}
+  if(diarioMudou){diarioMudou=false;mudou=true}
   return mudou;
 }
 const contadores=d=>JSON.parse(JSON.stringify({log:d.log||{},peg:d.peg||{},lac:(d.cfg&&d.cfg.lacStats)||{ok:0,tot:0},xp:(d.game&&d.game.xp)||0}));
@@ -1848,6 +2193,16 @@ function juntarCard(a,b){
   const ult=extra.reduce((m,h)=>h.d>m?h.d:m,"");if(!c.srs.last||ult>c.srs.last)c.srs.last=ult;
   return c;
 }
+function juntarDiario(R,L){
+  const out={};
+  new Set([...Object.keys(R||{}),...Object.keys(L||{})]).forEach(d=>{
+    const m=new Map();
+    [...((R||{})[d]||[]),...((L||{})[d]||[])].forEach(e=>{const k=e.t+"|"+e.id+"|"+e.r;const x=m.get(k);
+      if(!x)m.set(k,JSON.parse(JSON.stringify(e)));else if((e.motT||0)>(x.motT||0)){x.motivo=e.motivo;x.nota=e.nota;x.motT=e.motT}});
+    out[d]=[...m.values()].sort((a,b)=>a.t-b.t);
+  });
+  return out;
+}
 function juntar(L,R,snap){
   const out=JSON.parse(JSON.stringify(L));
   const del=Object.assign({},R.del||{});Object.entries(L.del||{}).forEach(([k,v])=>del[k]=Math.max(v,del[k]||0));out.del=del;
@@ -1857,11 +2212,12 @@ function juntar(L,R,snap){
     if(del[id]&&del[id]>=Math.max(ma,mb))return;
     out.cards.push(a&&b?(ma>=mb?juntarCard(a,b):juntarCard(b,a)):JSON.parse(JSON.stringify(a||b)))});
   const pos=new Map((L.cards||[]).map((c,i)=>[c.id,i]));out.cards.sort((x,y)=>(pos.has(x.id)?pos.get(x.id):1e9)-(pos.has(y.id)?pos.get(y.id):1e9));
-  if((R.taxMod||0)>(L.taxMod||0)){out.tax=JSON.parse(JSON.stringify(R.tax||{}));out.taxMod=R.taxMod}
+  if((R.taxMod||0)>(L.taxMod||0)){out.tax=JSON.parse(JSON.stringify(R.tax||{}));out.aulas=JSON.parse(JSON.stringify(R.aulas||[]));out.taxMod=R.taxMod}
   if(((R.cfg||{}).cfgMod||0)>((L.cfg||{}).cfgMod||0)){const k={lacStats:out.cfg.lacStats,mini:out.cfg.mini,avisado:out.cfg.avisado,ultimoAviso:out.cfg.ultimoAviso};out.cfg=Object.assign({},R.cfg,k)}
   const S=snap||{log:{},peg:{},lac:{ok:0,tot:0},xp:0},cr=contadores(R),cl=contadores(L);
   out.log=somaDelta(cr.log,cl.log,S.log);out.peg=somaDelta(cr.peg,cl.peg,S.peg);out.cfg.lacStats=somaDelta(cr.lac,cl.lac,S.lac);
   out.lidas={};[R.lidas||{},L.lidas||{}].forEach(o=>Object.entries(o).forEach(([d,a])=>out.lidas[d]=[...new Set([...(out.lidas[d]||[]),...a])]));
+  out.diario=juntarDiario(R.diario,L.diario);
   const gr=R.game||{dias:{}},gl=L.game||{dias:{}};out.game=out.game||{xp:0,dias:{},melhorCombo:0};out.game.dias=out.game.dias||{};
   new Set([...Object.keys(gr.dias||{}),...Object.keys(gl.dias||{})]).forEach(d=>{const x=(gr.dias||{})[d],y=(gl.dias||{})[d];
     if(!x||!y){out.game.dias[d]=JSON.parse(JSON.stringify(x||y));return}
@@ -1871,10 +2227,10 @@ function juntar(L,R,snap){
   const vivos=new Set(out.cards.map(c=>c.id));out.cards.forEach(c=>c.pares=(c.pares||[]).filter(i=>vivos.has(i)));
   return out;
 }
-function paraNuvem(d){const o=JSON.parse(JSON.stringify(d));o.versao=7;o.salvoEm=new Date().toISOString();o.dispositivo=ls.get(DEV_KEY)||"";
+function paraNuvem(d){const o=JSON.parse(JSON.stringify(d));o.versao=8;o.salvoEm=new Date().toISOString();o.dispositivo=ls.get(DEV_KEY)||"";
   const lim=Date.now()-180*864e5;Object.keys(o.del||{}).forEach(k=>{if(o.del[k]<lim)delete o.del[k]});return o}
 const soExemplos=d=>d.cards.length<=EXEMPLOS.length&&d.cards.every(c=>/^Exemplo/.test(c.fonte||"")&&!(c.srs.hist||[]).length);
-const paraComparar=d=>({cards:d.cards,del:d.del||{},tax:d.tax,log:d.log,peg:d.peg,lidas:d.lidas,game:d.game});
+const paraComparar=d=>({cards:d.cards,del:d.del||{},tax:d.tax,aulas:d.aulas||[],log:d.log,peg:d.peg,lidas:d.lidas,game:d.game,diario:d.diario||{}});
 function setNuvem(estado,msg=""){nuvem.estado=estado;nuvem.msg=msg;renderStatusNuvem();if($("#config").classList.contains("on"))renderNuvem()}
 function agendarSync(ms=4000){if(!gh)return;clearTimeout(nuvem.timer);nuvem.timer=setTimeout(()=>sincronizar(),ms)}
 async function sincronizar(opc={}){
